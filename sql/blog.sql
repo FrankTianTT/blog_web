@@ -36,7 +36,7 @@ CREATE TABLE `blog` (
 
 BEGIN;
 /*!40000 ALTER TABLE `blog` DISABLE KEYS */;
-INSERT INTO `blog` VALUES ('1','1','3','测试标题一','这里是测试内容','日记',0,'2020-05-09');
+INSERT INTO `blog` VALUES ('1','1','3','测试标题一','  这是测试内容一这是测试内容一这是测试内容一这是测试内容一这是测试内容一这是测试内容一这是测试内容一这是测试内容一这是测试内容一','日记',0,'2020-05-09');
 /*!40000 ALTER TABLE `blog` ENABLE KEYS */;
 COMMIT;
 
@@ -91,12 +91,12 @@ COMMIT;
 -- ----------------------------
 /* user所写的blog分类及数目 */
 
-DROP TABLE IF EXISTS `user_class`;
-CREATE TABLE `user_class` (
+DROP TABLE IF EXISTS `user_category`;
+CREATE TABLE `user_category` (
     `user_id` int(11) NOT NULL,
-    `class_id` int(11) NOT NULL,
+    `catogory_id` int(11) NOT NULL,
     `number` int(11) DEFAULT 0,
-    PRIMARY KEY (`user_id`,`class_id`)
+    PRIMARY KEY (`user_id`,`catogory_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -104,9 +104,9 @@ CREATE TABLE `user_class` (
 --
 
 BEGIN;
-/*!40000 ALTER TABLE `user_class` DISABLE KEYS */;
-INSERT INTO `user_class` VALUES ('1','3','2'), ('1','4','2'), ('2','4','1');
-/*!40000 ALTER TABLE `user_class` ENABLE KEYS */;
+/*!40000 ALTER TABLE `user_category` DISABLE KEYS */;
+INSERT INTO `user_category` VALUES ('1','3','2'), ('1','4','2'), ('2','4','1');
+/*!40000 ALTER TABLE `user_category` ENABLE KEYS */;
 COMMIT;
 
 
