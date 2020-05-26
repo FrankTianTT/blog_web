@@ -67,7 +67,7 @@ export default {
       });
     },
     jumpToRegister() {
-      this.$router.push({ name: "register" });
+      this.$router.push({ name: "Register" });
     }
   }
 };

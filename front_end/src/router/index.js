@@ -22,7 +22,7 @@ Vue.use(VueRouter)
   },
   {
     path:'/register',
-    name:'register',
+    name:'Register',
     component:()=>import('@/views/Register'),
     meta:{
       title:"注册新用户"
@@ -30,7 +30,7 @@ Vue.use(VueRouter)
   },
   {
     path:'/admin',
-    name:'admin',
+    name:'Admin',
     component:()=>import('@/views/Admin'),
     meta:{
       title:"后台管理"
@@ -38,7 +38,7 @@ Vue.use(VueRouter)
   },
   {
     path:'/blogHome',
-    name:'blogHome',
+    name:'BlogHome',
     component:()=>import("@/views/BlogHome"),
     meta:{
       title:"个人主页"
