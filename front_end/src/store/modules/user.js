@@ -2,6 +2,7 @@ import Vue from 'vue'
 import router from '@/router'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import { resetRouter } from '@/router'
+import {Message} from 'element-ui'
 import {
     loginAPI,
     registerAPI,
@@ -68,22 +69,28 @@ const user = {
     actions: {
         login: async ({ state,dispatch, commit }, userData) => {
             const res = await loginAPI(userData)
+            console.log("请求登陆的返回")
+            console.log(res)
             if(res){
-                console.log(res)
                 setToken(res.id)
                 commit('set_userId', res.id)
-                dispatch('getUserInfo')
-                if(state.userInfo.userType==='Admin'){
-                    router.push({name:'admin'})
-                }else{
-                    router.push({name:'blogHome'})
-                }
+                dispatch('getUserInfo').then(()=>{
+                    if(state.userInfo.userType==='Admin'){
+                        router.push({name:'Admin'})
+                    }else{
+                        router.push({name:"BlogHome"})
+                    }
+                })
+                Message.success("登陆成功")
+            }else{
+                Message.error("登陆失败")
             }
         },
         register: async({ commit }, data) => {
             const res = await registerAPI(data)
+            console.log(res)
             if(res){
-                message.success('注册成功')
+                Message.success('注册成功')
             }
         },
         getUserInfo({ state, commit }) {
@@ -109,7 +116,7 @@ const user = {
             }
             const res = await updateUserInfoAPI(params)
             if(res){
-                message.success('修改成功')
+                Message.success('修改成功')
                 dispatch('getUserInfo')
             }
         },

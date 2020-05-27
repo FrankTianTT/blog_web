@@ -2,9 +2,9 @@ import { axios } from '@/utils/request'
 const api = {
     adminPre: '/api/admin'
 }
-export function getManagerListAPI(){
+export function getUserListAPI(){
     return axios({
-        url: `${api.adminPre}/getAllManagers`,
+        url: `${api.adminPre}/getAllUsers`,
         method: 'POST'
     })
 }

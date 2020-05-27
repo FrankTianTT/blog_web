@@ -6,9 +6,11 @@ const getters = {
   userBlogList: state=>state.user.userBlogList,
   userCommentList:state=>state.user.userCommentList,
   //admin
-  managerList: state => state.admin.managerList,
-  addManagerModalVisible: state => state.admin.addManagerModalVisible,
-  addManagerParams: state => state.admin.addManagerParams,
+  userList:state => state.admin.userList,
+  addUserModalVisible: state => state.admin.addUserModalVisible,
+  addUserParams: state => state.admin.addUserParams,
+  editUserModalVisible:state => state.admin.editUserModalVisible,
+  currentUserInfo:state => state.admin.currentUserInfo
   }
   
   export default getters

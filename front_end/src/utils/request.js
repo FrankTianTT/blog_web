@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import axios from 'axios'
 import { VueAxios } from './axios'
-import {notification, message} from 'element-ui'
+import {notification, Message} from 'element-ui'
 import store from '@/store'
 import { getToken } from './auth'
 import router from '../router'
@@ -54,12 +54,12 @@ service.interceptors.response.use((response) => {
       if(response.data.success && response.data.success){
         return response.data.content
       }
-      message.error(response.data.message)
+      Message.error(response.data.message)
       break
     case 404:
       return false
     default:
-      message.error(response.data.message)
+      Message.error(response.data.message)
   }
 })
 

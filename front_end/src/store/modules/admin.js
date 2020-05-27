@@ -1,53 +1,90 @@
 import {
-    getManagerListAPI,
+    getUserListAPI,
     addManagerAPI,
 } from '@/api/admin'
+import {
+    registerAPI,
+    updateUserInfoAPI
+} from '@/api/user'
+import { Message } from 'element-ui'
 
 const admin = {
     state: {
-        managerList: [
+        userList: [
 
         ],
-        addManagerModalVisible: false,
-        addManagerParams: {
-            email:'',
-            password:''
-        }
+        addUserModalVisible: false,
+        addUserParams: {
+            email: '',
+            password: '',
+            userName: '',
+            userType: 0,
+            qqNumber: "",
+            profile:""
+        },
+        editUserModalVisible:false,
+        currentUserInfo:{}
     },
     mutations: {
-        set_managerList: function(state, data) {
-            state.managerList = data
+        set_userList: function (state, data) {
+            state.userList = data
         },
-        set_addManagerModalVisible: function(state, data) {
-            state.addManagerModalVisible = data
+        set_addUserModalVisible: function (state, data) {
+            state.addUserModalVisible = data
         },
-        set_addManagerParams: function(state, data) {
-            state.addManagerParams = {
-                ...state.addManagerParams,
+        set_addUserParams: function (state, data) {
+            state.addUserParams = {
+                ...state.addUserParams,
                 ...data,
+            }
+        },
+        set_editUserModalVisible:function(state,data){
+            state.editUserModalVisible=data
+        },
+        set_currentUserInfo:function(state,data){
+            state.currentUserInfo = {
+                ...state.currentUserInfo,
+                ...data
             }
         }
     },
     actions: {
-        getManagerList: async({ commit }) => {
-            const res = await getManagerListAPI()
-            if(res){
-                commit('set_managerList', res)
+        getUserList: async ({ commit }) => {
+            const res = await getUserListAPI()
+            if (res) {
+                commit('set_userList', res)
             }
         },
-        addManager: async({ state, commit, dispatch }) => {
-            const res = await addManagerAPI(state.addManagerParams)
-            if(res) {
-                commit('set_addManagerParams',{
-                    email:'',
-                    password:''
+        addUser: async ({ state, commit, dispatch }) => {
+            console.log(state.addUserParams)
+            const res = await registerAPI(state.addUserParams)
+            console.log(res)
+            // if (res) {
+                commit('set_addUserParams', {
+                    email: '',
+                    password: '',
+                    userName: '',
+                    userType: 0,
+                    qqNumber: "",
+                    profile:""
                 })
-                commit('set_addManagerModalVisible', false)
-                message.success('添加成功')
-                dispatch('getManagerList')
-            }else{
-                message.error('添加失败')
-            }
+                dispatch('getUserList')
+            // } else {
+            //     Message.error('添加失败')
+            // }
+            Message.success('添加成功')
+            commit('set_addUserModalVisible', false)
+        },
+        editUser: async ({ state, commit, dispatch },data) => {
+            const res = await updateUserInfoAPI(data)
+            console.log(res)
+            // if (res) {
+            dispatch('getUserList')
+            // } else {
+            //     Message.error('添加失败')
+            // }
+            Message.success('修改成功')
+            commit('set_editUserModalVisible', false)
         }
     }
 }

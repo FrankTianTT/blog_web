@@ -3,45 +3,57 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-  const routes = [
+const routes = [
   {
     path: '/login',
     name: 'Login',
     component: () => import('@/views/Login'),
-    meta:{
-      title:"请登录"
+    meta: {
+      title: "请登录"
     }
   },
   {
-    path:'/',
-    name:'Home',
-    redirect:'/login',
-    meta:{
-      title:"首页"
+    path: '/',
+    name: 'Home',
+    meta: {
+      title: "首页"
     }
   },
   {
-    path:'/register',
-    name:'Register',
-    component:()=>import('@/views/Register'),
-    meta:{
-      title:"注册新用户"
+    path: '/register',
+    name: 'Register',
+    component: () => import('@/views/Register'),
+    meta: {
+      title: "注册新用户"
     }
   },
   {
-    path:'/admin',
-    name:'Admin',
-    component:()=>import('@/views/Admin'),
-    meta:{
-      title:"后台管理"
-    }
+    path: '/admin',
+    name: 'Admin',
+    component: () => import('@/views/admin/Admin'),
+    redirect: "/admin/userManage",
+    meta: {
+      title: "后台管理"
+    },
+    children: [
+      { 
+        path: '/admin/userManage', 
+        name: 'UserManage',
+        component: () => import('@/views/admin/children/UserManage') 
+      },
+      {
+        path:'/admin/articleManage',
+        name:'ArticleManage',
+        component:() => import('@/views/admin/children/ArticleManage')
+      }
+    ]
   },
   {
-    path:'/blogHome',
-    name:'BlogHome',
-    component:()=>import("@/views/BlogHome"),
-    meta:{
-      title:"个人主页"
+    path: '/blogHome',
+    name: 'BlogHome',
+    component: () => import("@/views/BlogHome"),
+    meta: {
+      title: "个人主页"
     }
   }
 ]
