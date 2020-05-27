@@ -10,7 +10,8 @@ const getters = {
   addUserModalVisible: state => state.admin.addUserModalVisible,
   addUserParams: state => state.admin.addUserParams,
   editUserModalVisible:state => state.admin.editUserModalVisible,
-  currentUserInfo:state => state.admin.currentUserInfo
+  currentUserInfo:state => state.admin.currentUserInfo,
+  articleList:state => state.admin.articleList
   }
   
   export default getters

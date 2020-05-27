@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Home from '../views/Home'
 
 Vue.use(VueRouter)
 
@@ -15,6 +16,7 @@ const routes = [
   {
     path: '/',
     name: 'Home',
+    component:Home,
     meta: {
       title: "首页"
     }
@@ -45,13 +47,17 @@ const routes = [
         path:'/admin/articleManage',
         name:'ArticleManage',
         component:() => import('@/views/admin/children/ArticleManage')
+      },{
+        path:'/admin/commentManage',
+        name:'CommentManage',
+        component:() => import('@/views/admin/children/CommentManage')
       }
     ]
   },
   {
-    path: '/blogHome',
+    path: '/user/blogHome',
     name: 'BlogHome',
-    component: () => import("@/views/BlogHome"),
+    component: () => import("@/views/user/BlogHome"),
     meta: {
       title: "个人主页"
     }

@@ -18,6 +18,10 @@
             <i class="el-icon-document"></i>
             <span slot="title">文章管理</span>
           </el-menu-item>
+          <el-menu-item index="commentManage">
+            <i class="el-icon-notebook-1"></i>
+            <span slot="title">评论管理</span>
+          </el-menu-item>
         </el-menu>
       </el-aside>
       <el-main>
