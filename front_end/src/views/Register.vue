@@ -47,8 +47,8 @@ export default {
       if (value === "") {
         callback(new Error("请输入密码"));
       } else {
-        if(value.length<=6){
-          callback(new Error("输入密码长度必须大于6"))
+        if(value.length<=5){
+          callback(new Error("输入密码长度至少为6"))
         }
         if (this.userForm.checkPassword !== "") {
           this.$refs.userForm.validateField("checkPassword");
