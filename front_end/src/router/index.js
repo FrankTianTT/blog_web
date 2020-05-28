@@ -16,7 +16,7 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component:Home,
+    component: Home,
     meta: {
       title: "首页"
     }
@@ -38,29 +38,44 @@ const routes = [
       title: "后台管理"
     },
     children: [
-      { 
-        path: '/admin/userManage', 
+      {
+        path: '/admin/userManage',
         name: 'UserManage',
-        component: () => import('@/views/admin/children/UserManage') 
+        component: () => import('@/views/admin/children/UserManage')
       },
       {
-        path:'/admin/articleManage',
-        name:'ArticleManage',
-        component:() => import('@/views/admin/children/ArticleManage')
-      },{
-        path:'/admin/commentManage',
-        name:'CommentManage',
-        component:() => import('@/views/admin/children/CommentManage')
+        path: '/admin/articleManage',
+        name: 'ArticleManage',
+        component: () => import('@/views/admin/children/ArticleManage')
+      }, {
+        path: '/admin/commentManage',
+        name: 'CommentManage',
+        component: () => import('@/views/admin/children/CommentManage')
       }
     ]
   },
   {
-    path: '/user/blogHome',
-    name: 'BlogHome',
-    component: () => import("@/views/user/BlogHome"),
-    meta: {
-      title: "个人主页"
-    }
+    path: "/user",
+    name: "Layout",
+    component: () => import("@/views/Layout"),
+    children: [
+      {
+        path: '/user/blogHome',
+        name: 'BlogHome',
+        component: () => import("@/views/user/BlogHome"),
+        meta: {
+          title: "个人主页"
+        }
+      },
+      {
+        path: '/user/blogWrite',
+        name: 'BlogWrite',
+        component: () => import("@/views/user/BlogWrite"),
+        meta: {
+          title: "写文章"
+        }
+      }
+    ]
   }
 ]
 

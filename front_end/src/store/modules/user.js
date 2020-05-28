@@ -20,7 +20,8 @@ const getDefaultState = () => {
         ],
         userCommentList:[
 
-        ]
+        ],
+        token:''
     }
 }
 
@@ -37,8 +38,8 @@ const user = {
             state.userBlogList = [],
             state.userCommentList = []
         },
-        set_token: function(state, token){
-            state.token = token
+        set_token: (state, data)=>{
+            state.token = data
         },
         set_email: (state, data) => {
             state.email = data
@@ -74,6 +75,7 @@ const user = {
             if(res){
                 setToken(res.id)
                 commit('set_userId', res.id)
+                commit('set_token',res.id)
                 dispatch('getUserInfo').then(()=>{
                     if(state.userInfo.userType==='Admin'){
                         router.push({name:'Admin'})

@@ -28,7 +28,7 @@ console.log(process.env.NODE_ENV)
         description: 'Authorization verification failed'
       })
       if (token) {
-        store.dispatch('Logout').then(() => {
+        store.dispatch('logout').then(() => {
           setTimeout(() => {
             window.location.reload()
           }, 1500)
