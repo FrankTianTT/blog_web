@@ -17,9 +17,7 @@
     </select>
     <update id="updateAccount">
         update User set password=#{password},userName=#{userName},profile=#{profile},qqNumber=#{qqNumber}
-        where id=#{id} and #{password} is not null;
-        update User set userName=#{userName},profile=#{profile},qqNumber=#{qqNumber}
-        where id=#{id} and #{password} is null
+        where id=#{id} and #{password}
     </update>
 
     <resultMap id="User" type="com.example.blog.po.User">

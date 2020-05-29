@@ -1,4 +1,4 @@
-package com.example.blog.Controller.user;
+package com.example.blog.controller.user;
 
 import com.example.blog.bl.user.AccountService;
 import com.example.blog.po.User;
