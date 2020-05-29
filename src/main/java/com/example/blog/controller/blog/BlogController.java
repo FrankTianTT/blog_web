@@ -1,7 +1,6 @@
-package com.example.blog.Controller.blog;
+package com.example.blog.controller.blog;
 
 import com.example.blog.bl.blog.BlogService;
-import com.example.blog.util.ServiceException;
 import com.example.blog.vo.BlogVO;
 import com.example.blog.vo.ResponseVO;
 import org.springframework.beans.factory.annotation.Autowired;

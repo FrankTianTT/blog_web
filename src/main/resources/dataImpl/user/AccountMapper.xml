@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.blog.data.admin.AccountMapper">
+<mapper namespace="com.example.blog.data.user.AccountMapper">
     <insert id="createNewAccount" parameterType="com.example.blog.po.User" useGeneratedKeys="true" keyProperty="id">
         insert into User(email, password, userName, userType, profile, qqNumber)
         values(#{email},#{password},#{userName},#{userType},#{profile},#{qqNumber})
@@ -17,12 +17,10 @@
     </select>
     <update id="updateAccount">
         update User set password=#{password},userName=#{userName},profile=#{profile},qqNumber=#{qqNumber}
-        where id=#{id} and #{password} is not null;
-        update User set userName=#{userName},profile=#{profile},qqNumber=#{qqNumber}
-        where id=#{id} and #{password} is null
+        where id=#{id} and #{password}
     </update>
 
-    <resultMap id="User" type="com.example.hotel.po.User">
+    <resultMap id="User" type="com.example.blog.po.User">
         <id column="id" property="id"></id>
         <result column="email" property="email"></result>
         <result column="password" property="password"></result>

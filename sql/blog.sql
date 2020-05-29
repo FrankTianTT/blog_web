@@ -67,13 +67,14 @@ COMMIT;
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
-    `email` varchar(255) DEFAULT NULL,
+    `email` varchar(255) NOT NULL,
     `password` varchar(20) NOT NULL,
     `userName` varchar(255) NOT NULL,
     `userType` varchar(255) DEFAULT NULL,
     `profile` varchar(255) DEFAULT NULL,
-    `qqNumber` varchar(20) default NULL,
-    PRIMARY KEY (`id`)
+    `qqNumber` varchar(20) DEFAULT NULL,
+    PRIMARY KEY (`email`),
+    UNIQUE KEY id_unique (id)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
@@ -82,7 +83,8 @@ CREATE TABLE `user` (
 
 BEGIN;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'1042033333@qq.com','123456','测试一号','Blogger','测试个人简介1','2135234'), (2,'KyleBroflovski@gmail.com','123456','测试二号（管理员）','Admin','测试个人简介2222','3564754');
+INSERT INTO `user` VALUES (1,'1042033333@qq.com','123456','测试一号','Blogger','测试个人简介1','2135234'),
+                          (2,'KyleBroflovski@gmail.com','123456','测试二号（管理员）','Admin','测试个人简介2222','3564754');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 COMMIT;
 
