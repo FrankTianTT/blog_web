@@ -74,6 +74,23 @@ const routes = [
         meta: {
           title: "写文章"
         }
+      },
+      {
+        path: '/user/blogAllCategory',
+        name: 'categoryAll',
+        component: () => import("@/views/user/BlogAllCategory"),
+        meta: {
+          title: "文章分类"
+        }
+      },
+      ,
+      {
+        path: '/user/archives',
+        name: 'Archives',
+        component: () => import("@/views/user/BlogArchives"),
+        meta: {
+          title: "文章归档"
+        }
       }
     ]
   }

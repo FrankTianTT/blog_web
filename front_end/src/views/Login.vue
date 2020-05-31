@@ -28,6 +28,7 @@
 
 <script>
 import { mapGetters, mapActions, mapMutations } from "vuex";
+import {Message} from "element-ui";
 
 export default {
   name: "Login",
