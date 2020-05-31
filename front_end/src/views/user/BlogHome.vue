@@ -29,9 +29,7 @@ export default {
     methods: {
       loadUserBlog() {
         this.blogList = this.userBlogList
-        console.log('222')
         console.log(this.userBlogList)
-        console.log('111')
       }
     },
       components: {
