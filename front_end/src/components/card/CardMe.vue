@@ -1,9 +1,9 @@
 <template>
     <el-card>
-        <h1 class="me-author-name">{{userName}}</h1>
+        <h1 class="me-author-name">{{this.userInfo.userName}}</h1>
         <div class="me-author-description">
-            <div>联系我：{{qqNumber}}</div>
-            <div>关于我：{{profile}}</div>
+            <div>联系我：{{this.userInfo.qqNumber}}</div>
+            <div>关于我：{{this.userInfo.profile}}</div>
         </div>
     </el-card>
 
@@ -13,26 +13,9 @@
     import { mapGetters, mapActions, mapMutations } from "vuex";
     export default {
         name: 'CardMe',
-        created() {
-            this.showUserInfo()
-        },
-        data() {
-            return {
-                userName:'',
-                qqNumber:'',
-                profile:''
-            }
-        },
         computed:{
-            ...mapGetters(['userInfo','userBlogList']),
+            ...mapGetters(['userInfo']),
         },
-        methods: {
-            showUserInfo() {
-                this.userName = this.userInfo.userName
-                this.qqNumber = this.userInfo.qqNumber
-                this.profile = this.userInfo.profile
-            }
-        }
     }
 </script>
 

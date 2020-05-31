@@ -6,7 +6,7 @@
         <article-scroll-page></article-scroll-page>
       </el-main>
       <el-aside>
-        <card-me class="me-area"></card-me>
+        <card-me :userInfo="UserInfo"></card-me>
       </el-aside>
     </el-container>
   </div>
@@ -14,12 +14,30 @@
 <script>
 import ArticleScrollPage from '@/views/common/ArticleScrollPage'
 import CardMe from '@/components/card/CardMe'
+import { mapGetters, mapActions, mapMutations } from "vuex";
 export default {
     name:'BlogHome',
-    components: {
-      'card-me': CardMe,
-      ArticleScrollPage
-    }
+    created() {
+      this.loadUserBlog()
+    },
+    computed:{
+      ...mapGetters(['userInfo','userBlogList']),
+    },
+    data(){
+      blogList
+    },
+    methods: {
+      loadUserBlog() {
+        this.blogList = this.userBlogList
+        console.log('222')
+        console.log(this.userBlogList)
+        console.log('111')
+      }
+    },
+      components: {
+        'card-me': CardMe,
+        ArticleScrollPage
+      }
 }
 </script>
 
