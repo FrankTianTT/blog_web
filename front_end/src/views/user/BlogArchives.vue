@@ -14,7 +14,6 @@
 
             </el-aside>
 
-
             <el-main class="me-articles">
                 <div class="me-month-title">{{currentArchive}}</div>
 
@@ -27,9 +26,6 @@
 </template>
 
 <script>
-    import ArticleScrollPage from '@/views/common/ArticleScrollPage'
-    //import {listArchives} from '@/api/article'
-
     export default {
         name: "BlogArchive",
         components: {

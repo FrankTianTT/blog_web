@@ -1,40 +1,48 @@
+
 <template>
-  <div id="bloghome">
+  <div v-title data-title="BlogHome">
     <el-container>
 
       <el-main class="me-articles">
-        <article-scroll-page></article-scroll-page>
+        <article-scroll-page v-bind:personal="true"></article-scroll-page>
       </el-main>
       <el-aside>
-        <card-me :userInfo="UserInfo"></card-me>
+        <card-me class="me-area"></card-me>
       </el-aside>
+
     </el-container>
   </div>
 </template>
+
 <script>
-import ArticleScrollPage from '@/views/common/ArticleScrollPage'
-import CardMe from '@/components/card/CardMe'
-import { mapGetters, mapActions, mapMutations } from "vuex";
+import CardMe from '@/views/user/CardMe'
+import ArticleItem from '@/views/user/ArticleItem'
+import ArticleScrollPage from '@/views/user/ArticleScrollPage'
+import { mapGetters, mapActions} from "vuex";
+
 export default {
     name:'BlogHome',
-    created() {
-      this.loadUserBlog()
+    data() {
+      return {};
     },
     computed:{
-      ...mapGetters(['userInfo','userBlogList']),
+      ...mapGetters(['userInfo',"articleList"]),
     },
-    data(){
-      blogList
+    async mounted() {
+      this.getArticleList();
+      this.getUserInfo();
+      this.loadUserBlog();
     },
     methods: {
+      ...mapActions(["getArticleList","getUserInfo"]),
       loadUserBlog() {
-        this.blogList = this.userBlogList
-        console.log(this.userBlogList)
+        console.log('bloghome load')
       }
     },
       components: {
         'card-me': CardMe,
-        ArticleScrollPage
+        'article-item': ArticleItem,
+        'article-scroll-page':ArticleScrollPage,
       }
 }
 </script>
@@ -44,16 +52,17 @@ export default {
 <style scoped>
 
   .el-container {
-    width: 960px;
+    margin-left: 100px;
+    width: 1200px;
   }
 
   .el-aside {
-    margin-left: 20px;
-    width: 260px;
+    margin-left: 0px;
+    width: 26px;
   }
 
   .el-main {
-    padding: 0px;
+    padding: 10px;
     line-height: 16px;
   }
 
@@ -63,5 +72,8 @@ export default {
 
   .el-card:not(:first-child) {
     margin-top: 20px;
+  }
+  .me-area{
+    background-color: #fff;
   }
 </style>
