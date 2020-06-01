@@ -1,16 +1,6 @@
 <template>
   <div>
     <el-card>
-      <el-row>
-        <!-- <el-col :span="7">
-          <el-input placeholder="请输入内容" v-model="search">
-            <el-button slot="append" icon="el-icon-search"></el-button>
-          </el-input>
-        </el-col>-->
-        <el-col :span="4" :offset="20">
-          <el-button type="success" @click="handleAdd()">写文章</el-button>
-        </el-col>
-      </el-row>
       <el-table :data="articleList" border style="width: 100%">
         <el-table-column type="expand">
           <template slot-scope="props">

@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h1>评论管理</h1>
+    <el-card>
+      <div>评论管理</div>
+    </el-card>
   </div>
 </template>
 

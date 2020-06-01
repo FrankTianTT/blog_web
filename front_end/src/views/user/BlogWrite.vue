@@ -1,54 +1,62 @@
 <template>
   <div id="write">
-    <el-main class="me-write-main">
-      <div class="me-write-title">
+    <el-main>
+      <div class="write-title">
         <el-input
-          resize="none"
           type="textarea"
           autosize
           v-model="articleForm.title"
           placeholder="请输入标题"
           class="me-write-input"
         ></el-input>
-        <mavon-editor
-          v-model="content"
-          ref="md"
-          @save="save"
-          @change="change"
-          @imgAdd="$imgAdd"
-          style="min-height: 600px"
-        ></mavon-editor>
       </div>
-      <div id="placeholder" style="visibility: hidden;height: 89px;display: none;"></div>
+      <mavon-editor
+        v-model="content"
+        ref="md"
+        @save="save"
+        @change="change"
+        @imgAdd="$imgAdd"
+        style="min-height: 600px"
+      ></mavon-editor>
+      <div class="select-container">
+        <el-select v-model="articleForm.categoryId" placeholder="请选择文章分类">
+            <el-option
+              v-for="item in categorys"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            ></el-option>
+          </el-select>
+          <el-select
+            v-model="articleForm.labels"
+            multiple
+            filterable
+            allow-create
+            default-first-option
+            placeholder="请选择文章标签"
+          >
+            <el-option
+              v-for="item in tags"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            ></el-option>
+          </el-select>
+      </div>
+          
+      <div class="button-container">
+        <el-popconfirm
+          confirmButtonText="确定"
+          cancelButtonText="取消"
+          icon="el-icon-info"
+          iconColor="red"
+          title="请确认保存后发布"
+          @onConfirm="handleConfirm"
+        >
+          <el-button slot="reference">发布文章</el-button>
+        </el-popconfirm>
+      </div>
     </el-main>
-    <!-- 
-      <el-dialog
-        title="摘要 分类 标签"
-        :visible.sync="publishVisible"
-        :close-on-click-modal="false"
-        custom-class="me-dialog"
-      >
-        <el-form :model="articleForm" ref="articleForm" :rules="rules">
-          <el-form-item prop="summary">
-            <el-input type="textarea" v-model="articleForm.summary" :rows="6" placeholder="请输入摘要"></el-input>
-          </el-form-item>
-          <el-form-item label="文章分类" prop="category">
-            <el-select v-model="articleForm.category" value-key="id" placeholder="请选择文章分类">
-              <el-option v-for="c in categorys" :key="c.id" :label="c.categoryname" :value="c"></el-option>
-            </el-select>
-          </el-form-item>
-
-          <el-form-item label="文章标签" prop="tags">
-            <el-checkbox-group v-model="articleForm.tags">
-              <el-checkbox v-for="t in tags" :key="t.id" :label="t.id" name="tags">{{t.tagname}}</el-checkbox>
-            </el-checkbox-group>
-          </el-form-item>
-        </el-form>
-        <div slot="footer" class="dialog-footer">
-          <el-button @click="publishVisible = false">取 消</el-button>
-          <el-button type="primary" @click="publish('articleForm')">发布</el-button>
-        </div>
-    </el-dialog>-->
   </div>
 </template>
 <script>
@@ -56,6 +64,7 @@ import BaseHeader from "@/components/BaseHeader";
 import { mavonEditor } from "mavon-editor";
 require("mavon-editor/dist/css/index.css");
 import { Message } from "element-ui";
+import { mapGetters, mapActions, mapMutations } from "vuex";
 
 export default {
   name: "BlogWrite",
@@ -67,13 +76,29 @@ export default {
     return {
       content: "", // 输入的markdown
       html: "", // 转成的html
-      publishVisible: false,
       articleForm: {
-        title: ""
-      }
+        title: "",
+        content: "",
+        categoryId: "",
+        labels: [],
+        createDate: ""
+      },
+      categorys: [
+        { value: 1, label: "前端" },
+        { value: 2, label: "后端" },
+        { value: 3, label: "生活" }
+      ],
+      tags: [
+        { value: "标签1", label: "标签1" },
+        { value: "标签2", label: "标签2" }
+      ]
     };
   },
+  computed:{
+    ...mapGetters(['userId'])
+  },
   methods: {
+    ...mapActions(['addArticle']),
     change(value, render) {
       //实时获取转成html的数据
       this.html = render;
@@ -88,71 +113,45 @@ export default {
       console.log(value);
       console.log("以下是render");
       console.log(render);
+      this.articleForm.content = this.content
     },
-    publishShow() {},
-    cancel() {}
+    handleConfirm() {
+      console.log(this.articleForm);
+      if (!this.articleForm.title) {
+        Message.error("文章标题不能为空");
+        return;
+      }
+      if (!this.articleForm.content) {
+        Message.error("文章内容不能为空，请确认保存");
+        return;
+      }
+      if (!this.articleForm.categoryId) {
+        Message.error("请添加文章分类");
+        return;
+      }
+      
+      const data = {
+        userId:this.userId,
+        categoryId:this.articleForm.categoryId,
+        title:this.articleForm.title,
+        content:this.articleForm.content,
+        label:this.articleForm.labels.join(" "),
+        createDate:new Date().toLocaleDateString()
+      };
+      console.log(data);
+      this.addArticle(data);
+    }
   }
 };
 </script>
 <style scoped>
-.el-header {
-  min-width: 100%;
-  box-shadow: 0 2px 3px hsla(0, 0%, 7%, 0.1), 0 0 0 1px hsla(0, 0%, 7%, 0.1);
+.write-title {
+  margin-bottom: 30px;
 }
-
-.me-write-info {
-  line-height: 60px;
-  font-size: 18px;
-  font-weight: 600;
+.button-container {
+  margin-top: 15px;
 }
-
-.me-write-btn {
-  margin-top: 10px;
-}
-
-.me-write-box {
-  max-width: 700px;
-  margin: 80px auto 0;
-}
-
-.me-write-main {
-  padding: 0;
-}
-
-.me-write-title {
-}
-
-.me-write-input textarea {
-  font-size: 32px;
-  font-weight: 600;
-  height: 20px;
-  border: none;
-}
-
-.me-write-editor {
-  min-height: 650px !important;
-}
-
-.me-header-left {
-  margin-top: 10px;
-}
-
-.me-title img {
-  max-height: 2.4rem;
-  max-width: 100%;
-}
-
-.me-write-toolbar-fixed {
-  width: 700px !important;
-  top: 60px;
-}
-
-.v-note-op {
-  box-shadow: none !important;
-}
-
-.auto-textarea-input,
-.auto-textarea-block {
-  font-size: 18px !important;
+.select-container{
+  margin:10px;
 }
 </style>

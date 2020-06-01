@@ -1,6 +1,7 @@
 import {
     getUserListAPI,
     addManagerAPI,
+    deleteUserAPI
 } from '@/api/admin'
 import {
     registerAPI,
@@ -101,6 +102,14 @@ const admin = {
                 commit('set_articleList',res);
             }else{
                 Message.error("获取文章列表出错");
+            }
+        },
+        deleteUser:async ({dispatch},data)=>{
+            const res = await deleteUserAPI(data);
+            if(res){
+                dispatch('getUserList');
+            }else{
+                Message.error("删除失败");
             }
         }
     }

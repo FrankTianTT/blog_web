@@ -8,10 +8,9 @@ export function getUserListAPI(){
         method: 'POST'
     })
 }
-export function addManagerAPI(data) {
+export function deleteUserAPI(data) {
     return axios({
-        url: `${api.adminPre}/addManager`,
+        url: `${api.adminPre}/DelUser/${data.id}`,
         method: 'POST',
-        data
     })
 }

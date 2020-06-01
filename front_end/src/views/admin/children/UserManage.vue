@@ -60,7 +60,7 @@ export default {
     await this.getUserList();
   },
   methods: {
-    ...mapActions(["getUserList"]),
+    ...mapActions(["getUserList","deleteUser"]),
     ...mapMutations(["set_addUserModalVisible","set_currentUserInfo","set_editUserModalVisible"]),
     handleAdd() {
       this.set_addUserModalVisible(true);
@@ -73,6 +73,7 @@ export default {
     handleDelete(index, row) {
       console.log(index);
       console.log(row);
+      this.deleteUser({id:row.id})
     }
   }
 };
@@ -80,6 +81,6 @@ export default {
 
 <style scoped>
 .el-row {
-  padding-bottom: 20px;
+  padding:10px;
 }
 </style>

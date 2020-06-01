@@ -3,7 +3,7 @@
         <base-header></base-header>
         <el-container>
         <el-main class="me-articles">
-            <article-item v-for="a in articles" :key="a.id" v-bind="a"></article-item>
+            <article-item v-for="a in articleList" :key="a.id" v-bind="a"></article-item>
         </el-main>
         <el-aside>
             <div class="me-ad">广告区</div>
@@ -26,18 +26,14 @@
             };
         },
         computed:{
-            ...mapGetters(['userInfo',"articleList"]),
+            ...mapGetters(["articleList"]),
         },
         async mounted() {
             this.getArticleList();
-            this.getUserInfo();
-            this.loadAllBlog();
+            // this.getUserInfo();
         },
         methods: {
-            ...mapActions(["getArticleList","getUserInfo"]),
-            loadAllBlog() {
-                this.articles = this.articleList
-            }
+            ...mapActions(["getArticleList"]),
         },
         components: {
             'base-header':BaseHeader,

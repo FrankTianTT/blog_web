@@ -1,5 +1,7 @@
 package com.example.blog.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -11,7 +13,7 @@ public class BlogVO {
     private String content;
     private String label;
     private int viewTimes;
-    private LocalDate createDate;
+    private String createDate;
 
     private List<CommentVO> comments;
 
@@ -71,11 +73,11 @@ public class BlogVO {
         this.viewTimes = viewTimes;
     }
 
-    public LocalDate getCreateDate() {
+    public String getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(LocalDate createDate) {
+    public void setCreateDate(String createDate) {
         this.createDate = createDate;
     }
 
