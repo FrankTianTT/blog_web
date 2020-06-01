@@ -2,9 +2,8 @@
 <template>
   <div v-title data-title="BlogHome">
     <el-container>
-
       <el-main class="me-articles">
-        <article-scroll-page v-bind:personal="true"></article-scroll-page>
+        <article-item v-for="a in articles" :key="a.id" v-bind="a"></article-item>
       </el-main>
       <el-aside>
         <card-me class="me-area"></card-me>
@@ -17,13 +16,14 @@
 <script>
 import CardMe from '@/views/user/CardMe'
 import ArticleItem from '@/views/user/ArticleItem'
-import ArticleScrollPage from '@/views/user/ArticleScrollPage'
 import { mapGetters, mapActions} from "vuex";
 
 export default {
     name:'BlogHome',
     data() {
-      return {};
+      return {
+        articles:[]
+      };
     },
     computed:{
       ...mapGetters(['userInfo',"articleList"]),
@@ -36,13 +36,14 @@ export default {
     methods: {
       ...mapActions(["getArticleList","getUserInfo"]),
       loadUserBlog() {
-        console.log('bloghome load')
+        for(var i=0;i<this.articleList.length;i++){
+          if(this.articleList[i].userId===this.userInfo.id) this.articles.push(this.articleList[i])
+        }
       }
     },
       components: {
         'card-me': CardMe,
         'article-item': ArticleItem,
-        'article-scroll-page':ArticleScrollPage,
       }
 }
 </script>

@@ -1,12 +1,11 @@
 <template>
-    <scroll-page :loading="loading" :offset="offset" :no-data="noData" v-on:load="load">
+    <div>
         <article-item v-for="a in articles" :key="a.id" v-bind="a"></article-item>
-    </scroll-page>
+    </div>
 </template>
 
 <script>
     import ArticleItem from '@/views/user/ArticleItem'
-    import ScrollPage from '@/views/components/scrollpage'
     import {mapActions, mapGetters} from "vuex";
 
     export default {
@@ -70,7 +69,6 @@
         },
         components: {
             'article-item': ArticleItem,
-            'scroll-page': ScrollPage
         }
 
     }

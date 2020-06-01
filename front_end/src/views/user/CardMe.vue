@@ -8,7 +8,6 @@
             <div>{{this.profile}}</div>
         </div>
     </el-card>
-
 </template>
 
 <script>

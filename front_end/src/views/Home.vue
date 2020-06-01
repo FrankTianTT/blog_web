@@ -3,7 +3,7 @@
         <base-header></base-header>
         <el-container>
         <el-main class="me-articles">
-            <article-scroll-page v-bind:personal="false"></article-scroll-page>
+            <article-item v-for="a in articles" :key="a.id" v-bind="a"></article-item>
         </el-main>
         <el-aside>
             <div class="me-ad">广告区</div>
@@ -17,13 +17,13 @@
 <script>
     import BaseHeader from "../components/BaseHeader";
     import ArticleItem from '@/views/user/ArticleItem'
-    import ArticleScrollPage from '@/views/user/ArticleScrollPage'
-
     import { mapGetters, mapActions} from "vuex";
     export default {
         name:"Home",
         data() {
-            return {};
+            return {
+                articles: []
+            };
         },
         computed:{
             ...mapGetters(['userInfo',"articleList"]),
@@ -36,13 +36,12 @@
         methods: {
             ...mapActions(["getArticleList","getUserInfo"]),
             loadAllBlog() {
-                console.log('home load')
+                this.articles = this.articleList
             }
         },
         components: {
+            'base-header':BaseHeader,
             'article-item': ArticleItem,
-            'article-scroll-page':ArticleScrollPage,
-            'base-header':BaseHeader
         }
     }
 </script>

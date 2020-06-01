@@ -4,7 +4,7 @@
 
 <script>
     export default {
-        name: "ArticleItem"
+        name: "ArchiveCard"
     }
 </script>
 
