@@ -9,6 +9,7 @@ import com.example.blog.po.User;
 
 import com.example.blog.vo.BlogForm;
 
+import com.example.blog.vo.BlogVO;
 import com.example.blog.vo.ResponseVO;
 
 import com.example.blog.vo.UserForm;
@@ -53,10 +54,11 @@ public class AdminController {
 
 
 
-    @PostMapping("/DelUser")
+    @PostMapping("/DelUser/{userid}")
 
-    public ResponseVO DelUser(@RequestBody User user){
-        return ResponseVO.buildSuccess(adminService.DelUser(user));
+    public ResponseVO DelUser(@RequestBody Integer id){
+
+        return ResponseVO.buildSuccess(adminService.DelUser(id));
     }
 
 
@@ -68,9 +70,14 @@ public class AdminController {
 
 
 
-    @PostMapping("/DelBlog")
-    public ResponseVO DelBlog(@RequestBody Blog blog){
-        return adminService.DelBlog(blog);
+    @PostMapping("/DelBlog/{blogid}")
+    public ResponseVO DelBlog(@RequestBody int id){
+        return adminService.DelBlog(id);
+    }
+
+    @PostMapping("/getAllComments")
+    public ResponseVO getAllComments(){
+        return ResponseVO.buildSuccess(adminService.getAllComments());
     }
 
 }

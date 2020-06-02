@@ -10,6 +10,7 @@ import com.example.blog.enums.UserType;
 
 import com.example.blog.po.Blog;
 
+import com.example.blog.po.Comment;
 import com.example.blog.po.User;
 
 import com.example.blog.vo.BlogForm;
@@ -84,9 +85,9 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
 
-    public ResponseVO DelUser(User user) {
+    public ResponseVO DelUser(Integer id) {
 
-        adminMapper.DelUser(user);
+        adminMapper.DelUser(id);
 
         return ResponseVO.buildSuccess(true);
 
@@ -126,12 +127,18 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
 
-    public ResponseVO DelBlog(Blog blog) {
+    public ResponseVO DelBlog(int id) {
 
-        adminMapper.DelBlog(blog);
+        adminMapper.DelBlog(id);
 
         return ResponseVO.buildSuccess(true);
 
+    }
+
+    @Override
+    public List<Comment> getAllComments() {
+
+        return adminMapper.getAllComments();
     }
 
 }

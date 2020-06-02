@@ -4,6 +4,7 @@ package com.example.blog.data.admin;
 
 import com.example.blog.po.Blog;
 
+import com.example.blog.po.Comment;
 import com.example.blog.po.User;
 
 import com.example.blog.vo.UserForm;
@@ -32,8 +33,10 @@ public interface AdminMapper {
 
     int addBlog(Blog blog);
 
-    void DelUser(User user);
+    void DelUser(Integer id);
 
-    void DelBlog(Blog blog);
+    List<Comment> getAllComments();
+
+    void DelBlog(int id);
 
 }
