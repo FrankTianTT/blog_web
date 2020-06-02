@@ -6,6 +6,8 @@ public class Blog {
     private int id;
     private int userId;
     private int categoryId;
+    private String userName;
+    private String categoryName;
     private String title;
     private String content;
     private String label;
@@ -74,5 +76,21 @@ public class Blog {
 
     public void setCreateDate(LocalDate createDate) {
         this.createDate = createDate;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 }

@@ -44,4 +44,16 @@ public class BlogServiceImpl implements BlogService {
     public List<CommentVO> retrieveBlogComments(Integer blogId){
         return blogMapper.selectAllBlogComments(blogId);
     }
+
+    @Override
+    public List<BlogVO> getBlogByTime(int year, int month){
+        List<BlogVO> allBlogs = blogMapper.selectAllBlog();
+        List<BlogVO> res = null;
+        for(BlogVO blogVO: allBlogs){
+            String[] s = blogVO.getCreateDate().split("-");
+            if(Integer.parseInt(s[0])==year && Integer.parseInt(s[1]) == month)
+                res.add(blogVO);
+        }
+        return res;
+    }
 }

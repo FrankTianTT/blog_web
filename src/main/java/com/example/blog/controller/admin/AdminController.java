@@ -48,11 +48,7 @@ public class AdminController {
     @PostMapping("/addManager")
 
     public ResponseVO addUser(@RequestBody UserForm userForm){
-
-
-
         return adminService.addUser(userForm);
-
     }
 
 
@@ -60,33 +56,21 @@ public class AdminController {
     @PostMapping("/DelUser")
 
     public ResponseVO DelUser(@RequestBody User user){
-
         return ResponseVO.buildSuccess(adminService.DelUser(user));
-
     }
 
 
 
     @PostMapping("/addBlog")
-
     public ResponseVO addBlog(@RequestBody BlogForm blogform){
-
-
-
         return adminService.addBlog(blogform);
-
     }
 
 
 
     @PostMapping("/DelBlog")
-
     public ResponseVO DelBlog(@RequestBody Blog blog){
-
-
-
         return adminService.DelBlog(blog);
-
     }
 
 }

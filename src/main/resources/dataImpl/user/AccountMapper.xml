@@ -19,6 +19,9 @@
         update User set password=#{password},userName=#{userName},profile=#{profile},qqNumber=#{qqNumber}
         where id=#{id} and #{password}
     </update>
+    <select id="selectAllUserBlogs" resultMap="Blog">
+        select * from blog where userId = #{userId}
+    </select>
 
     <resultMap id="User" type="com.example.blog.po.User">
         <id column="id" property="id"></id>
@@ -28,5 +31,18 @@
         <result column="userType" property="userType"></result>
         <result column="profile" property="profile"></result>
         <result column="qqNumber" property="qqNumber"></result>
+    </resultMap>
+
+    <resultMap id="Blog" type="com.example.blog.vo.BlogVO">
+        <id column="id" property="id"></id>
+        <result column="userId" property="userId"></result>
+        <result column="categoryId" property="categoryId"></result>
+        <result column="userName" property="userName"></result>
+        <result column="categoryName" property="categoryName"></result>
+        <result column="title" property="title"></result>
+        <result column="content" property="content"></result>
+        <result column="label" property="label"></result>
+        <result column="view_times" property="viewTimes"></result>
+        <result column="create_date" property="createDate"></result>
     </resultMap>
 </mapper>

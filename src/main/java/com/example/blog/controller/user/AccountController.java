@@ -47,4 +47,10 @@ public class AccountController {
     public ResponseVO makeComment(@RequestBody CommentVO commentVO, @PathVariable int id){
         return accountService.makeComment(id, commentVO);
     }
+
+
+    @GetMapping("/{userId}/getUserBlogs")
+    public ResponseVO getBlogById(@PathVariable int userId){
+        return ResponseVO.buildSuccess(accountService.retrieveUserBlogs(userId));
+    }
 }

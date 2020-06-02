@@ -9,6 +9,8 @@ public class BlogVO {
     private int id;
     private int userId;
     private int categoryId;
+    private String userName;
+    private String categoryName;
     private String title;
     private String content;
     private String label;
@@ -87,5 +89,21 @@ public class BlogVO {
 
     public void setComments(List<CommentVO> comments) {
         this.comments = comments;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 }

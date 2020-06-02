@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.blog.data.blog.BlogMapper">
     <insert id="insertBlog" parameterType="com.example.blog.po.Blog" useGeneratedKeys="true" keyProperty="id">
-        insert into Blog(userId, categoryId, title, content, label, view_times, create_date)
-        values (#{userId},#{categoryId},#{title},#{content},#{label},#{viewTimes},#{createDate})
+        insert into Blog(userId, categoryId, userName, categoryName, title, content, label, view_times, create_date)
+        values (#{userId},#{categoryId},#{userName},#{title},#{content},#{label},#{viewTimes},#{createDate})
     </insert>
     <select id="selectAllBlog" resultMap="Blog">
         select * from blog
@@ -19,6 +19,8 @@
         <id column="id" property="id"></id>
         <result column="userId" property="userId"></result>
         <result column="categoryId" property="categoryId"></result>
+        <result column="userName" property="userName"></result>
+        <result column="categoryName" property="categoryName"></result>
         <result column="title" property="title"></result>
         <result column="content" property="content"></result>
         <result column="label" property="label"></result>

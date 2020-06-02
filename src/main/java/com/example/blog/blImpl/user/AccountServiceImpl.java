@@ -9,6 +9,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AccountServiceImpl implements AccountService {
     private final static String ACCOUNT_EXIST = "账号已存在";
@@ -74,5 +76,10 @@ public class AccountServiceImpl implements AccountService {
             return ResponseVO.buildFailure(WRITE_ERROR);
         }
         return ResponseVO.buildSuccess(true);
+    }
+
+    @Override
+    public List<BlogVO> retrieveUserBlogs(int userId){
+        return accountMapper.selectAllUserBlogs(userId);
     }
 }

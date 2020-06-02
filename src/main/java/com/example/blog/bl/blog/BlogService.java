@@ -1,5 +1,6 @@
 package com.example.blog.bl.blog;
 
+import com.example.blog.po.Blog;
 import com.example.blog.util.ServiceException;
 import com.example.blog.vo.BlogVO;
 import com.example.blog.vo.CommentVO;
@@ -14,4 +15,6 @@ public interface BlogService {
     BlogVO retrieveBlogDetails(Integer blogId);
 
     List<CommentVO> retrieveBlogComments(Integer blogId);
+
+    List<BlogVO> getBlogByTime(int year, int month);
 }

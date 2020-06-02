@@ -3,6 +3,7 @@ package com.example.blog.controller.blog;
 import com.example.blog.bl.blog.BlogService;
 import com.example.blog.vo.BlogVO;
 import com.example.blog.vo.ResponseVO;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +14,7 @@ public class BlogController {
     BlogService blogService;
 
     @PostMapping("/addBlog")
-    public ResponseVO createHotel(@RequestBody BlogVO blogVO){
+    public ResponseVO createBlog(@RequestBody BlogVO blogVO){
         blogService.addBlog(blogVO);
         return ResponseVO.buildSuccess(true);
     }
@@ -33,4 +34,8 @@ public class BlogController {
         return ResponseVO.buildSuccess(blogService.retrieveBlogComments(blogId));
     }
 
+    @GetMapping("/{year}/{month}/")
+    public ResponseVO getBlogByTime(@PathVariable int year, @PathVariable int month){
+        return ResponseVO.buildSuccess(blogService.getBlogByTime(year,month));
+    }
 }
