@@ -49,7 +49,7 @@ public class AccountController {
     }
 
 
-    @GetMapping("/{userId}/getUserBlogs")
+    @GetMapping("/{userId}/getUserArticle")
     public ResponseVO getBlogById(@PathVariable int userId){
         return ResponseVO.buildSuccess(accountService.retrieveUserBlogs(userId));
     }

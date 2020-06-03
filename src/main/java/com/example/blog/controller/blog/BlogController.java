@@ -34,7 +34,7 @@ public class BlogController {
         return ResponseVO.buildSuccess(blogService.retrieveBlogComments(blogId));
     }
 
-    @GetMapping("/{year}/{month}/")
+    @GetMapping("/{year}/{month}")
     public ResponseVO getBlogByTime(@PathVariable int year, @PathVariable int month){
         return ResponseVO.buildSuccess(blogService.getBlogByTime(year,month));
     }
