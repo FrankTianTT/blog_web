@@ -4,6 +4,7 @@ package com.example.blog.bl.admin;
 
 import com.example.blog.po.Blog;
 
+import com.example.blog.po.Comment;
 import com.example.blog.po.User;
 
 import com.example.blog.vo.BlogForm;
@@ -36,7 +37,7 @@ public interface AdminService {
 
      */
 
-    ResponseVO DelUser(User user);
+    ResponseVO DelUser(Integer id);
 
 
 
@@ -58,9 +59,13 @@ public interface AdminService {
 
      */
 
-    ResponseVO DelBlog(Blog blog);
+    ResponseVO DelBlog(int id);
 
-
+    /**
+     * 获得所有评论
+     * @return
+     */
+    List<Comment> getAllComments();
 
     List<User> getAllUsers();
 
