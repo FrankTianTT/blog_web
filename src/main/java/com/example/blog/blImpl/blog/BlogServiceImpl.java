@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -48,7 +49,7 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public List<BlogVO> getBlogByTime(int year, int month){
         List<BlogVO> allBlogs = blogMapper.selectAllBlog();
-        List<BlogVO> res = null;
+        List<BlogVO> res = new ArrayList<>();
         for(BlogVO blogVO: allBlogs){
             String[] s = blogVO.getCreateDate().split("-");
             if(Integer.parseInt(s[0])==year && Integer.parseInt(s[1]) == month)
