@@ -23,6 +23,12 @@ export function getUserInfoAPI(id){
         method: 'GET'
     })
 }
+export function getUserArticleAPI(id){
+    return axios({
+        url: `${api.userPre}/${id}/getUserArticle`,
+        method: 'GET'
+    })
+}
 export function updateUserInfoAPI(data) {
     return axios({
         url: `${api.userPre}/${data.id}/update`,

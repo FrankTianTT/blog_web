@@ -11,11 +11,10 @@
     export default {
         name: "ArticleScrollPage",
         computed:{
-            ...mapGetters(['userInfo',"articleList"]),
+            ...mapGetters(["articleList"]),
         },
         async mounted() {
             this.getArticleList();
-            this.getUserInfo();
             this.loadBlog();
         },
         props: {

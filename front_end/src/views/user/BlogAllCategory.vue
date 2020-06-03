@@ -1,13 +1,11 @@
 <template>
-    <div class="me-allct-body" v-title :data-title="categoryTagTitle" >
         <el-container class="me-allct-container">
             <el-main>
                 <li v-for="c in categorys" @click="view(c.id)" :key="c.id" class="me-allct-item">
                     <div class="me-allct-content">
                         <a class="me-allct-info">
-                            <img class="me-allct-img" :src="c.avatar?c.avatar:defaultAvatar"/>
+                            <img class="me-allct-img" :src="c.img"/>
                             <h4 class="me-allct-name">{{c.categoryname}}</h4>
-                            <p class="me-allct-description">{{c.description}}</p>
                         </a>
 
                         <div class="me-allct-meta">
@@ -17,87 +15,61 @@
                 </li>
             </el-main>
         </el-container>
-    </div>
 </template>
 
 <script>
-    //import {getAllCategorysDetail} from '@/api/category'
+import img1 from '@/assets/img/category/1.jpeg'
+import img2 from '@/assets/img/category/2.jpeg'
+import img3 from '@/assets/img/category/3.jpeg'
+import img4 from '@/assets/img/category/4.jpeg'
+import img5 from '@/assets/img/category/5.jpeg'
+import img6 from '@/assets/img/category/6.jpeg'
+import img7 from '@/assets/img/category/7.jpeg'
+import img8 from '@/assets/img/category/8.jpeg'
+import {mapActions, mapGetters} from "vuex";
 
-    export default {
-        name: 'BlogAllCategoryTag',
-        created() {
-            this.getCategorys()
-            this.getTags()
-        },
-        data() {
-            return {
-                defaultAvatar:defaultAvatar,
-                categorys: [],
-                tags: [],
-                currentActiveName: 'category'
-            }
-        },
-        computed: {
-            activeName: {
-                get() {
-                    return (this.currentActiveName = this.$route.params.type)
-                },
-                set(newValue) {
-                    this.currentActiveName = newValue
-                }
-            },
-            categoryTagTitle (){
-                if(this.currentActiveName == 'category'){
-                    return '文章分类 - For Fun'
-                }
-                console.info('dddd')
-                return '标签 - For Fun'
-            }
-        },
-        methods: {
-            view(id) {
-                this.$router.push({path: `/${this.currentActiveName}/${id}`})
-            },
-            getCategorys() {
-                let that = this
-                getAllCategorysDetail().then(data => {
-                    that.categorys = data.data
-                }).catch(error => {
-                    if (error !== 'error') {
-                        that.$message({type: 'error', message: '文章分类加载失败', showClose: true})
-                    }
-                })
-            },
-            getTags() {
-                let that = this
-                getAllTagsDetail().then(data => {
-                    that.tags = data.data
-                }).catch(error => {
-                    if (error !== 'error') {
-                        that.$message({type: 'error', message: '标签加载失败', showClose: true})
-                    }
-                })
-            }
-        },
-        //组件内的守卫 调整body的背景色
-        beforeRouteEnter(to, from, next) {
-            window.document.body.style.backgroundColor = '#fff';
-            next();
-        },
-        beforeRouteLeave(to, from, next) {
-            window.document.body.style.backgroundColor = '#f5f5f5';
-            next();
+export default {
+    name: 'BlogAllCategory',
+    created() {
+        this.loadCategorys();
+    },
+    data() {
+        return {
+            categorys: [],
+            tags: []
         }
-    }
+    },
+    computed:{
+        ...mapGetters(["userArticleList"]),
+    },
+    methods: {
+        loadCategorys(){
+            let c = ['日记', '技术','学习','美食','旅游','生活','时尚','文学']
+            let img = [img1,img2,img3,img4,img5,img6,img7,img8]
+            for(let i=0;i<c.length;i++){
+                this.categorys.push({'id':i+1,'img':img[i],'categoryname':c[i],'articles':0})
+            }
+            for(let i=0;i<this.userArticleList.length;i++){
+                this.categorys[this.userArticleList[i].categoryId-1].articles += 1
+            }
+        },
+        view(id) {
+            this.$router.push({path: `category`,query: {id}})
+        },
+    },
+}
 </script>
 
 <style>
+    .el-main {
+    }
+
     .me-allct-body {
         margin: 60px auto 140px;
     }
 
     .me-allct-container {
-        width: 1000px;
+        width: 1250px;
     }
 
     .me-allct-items {
@@ -132,15 +104,6 @@
         height: 60px;
         vertical-align: middle;
 
-    }
-
-    .me-allct-name {
-        font-size: 21px;
-        font-weight: 150;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        margin-top: 4px;
     }
 
     .me-allct-description {

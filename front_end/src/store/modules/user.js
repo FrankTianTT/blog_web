@@ -2,46 +2,44 @@ import Vue from 'vue'
 import router from '@/router'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import { resetRouter } from '@/router'
-import { Message } from 'element-ui'
+import {Message} from 'element-ui'
 import {
     loginAPI,
     registerAPI,
     getUserInfoAPI,
+    getUserArticleAPI,
     updateUserInfoAPI,
 } from '@/api/user'
-import {
-    addArticleAPI
-} from '@/api/article'
 const getDefaultState = () => {
     return {
         userId: '',
         userInfo: {
 
         },
-        userBlogList: [
+        userArticleList: [
 
         ],
-        userCommentList: [
+        userCommentList:[
 
         ],
-        token: ''
+        token:''
     }
 }
 
 const user = {
-    state: getDefaultState(),
+    state : getDefaultState(),
 
     mutations: {
-        reset_state: function (state) {
+        reset_state: function(state) {
             state.token = '',
-                state.userId = '',
-                state.userInfo = {
-
-                },
-                state.userBlogList = [],
-                state.userCommentList = []
+            state.userId = '',
+            state.userInfo = {
+                
+            },
+            state.userBlogList = [],
+            state.userCommentList = []
         },
-        set_token: (state, data) => {
+        set_token: (state, data)=>{
             state.token = data
         },
         set_email: (state, data) => {
@@ -56,13 +54,10 @@ const user = {
                 ...data
             }
         },
-        set_userBlogList: (state, data) => {
-            state.userBlogList = {
-                ...state.userBlogList,
-                ...data
-            }
+        set_userArticleList:(state,data)=>{
+            state.userArticleList = data
         },
-        set_userCommentList: (state, data) => {
+        set_userCommentList:(state,data)=>{
             state.userCommentList = {
                 ...state.userCommentList,
                 ...data
@@ -71,66 +66,73 @@ const user = {
     },
 
     actions: {
-        login: async ({ state, dispatch, commit }, userData) => {
+        login: async ({ state,dispatch, commit }, userData) => {
             const res = await loginAPI(userData)
             console.log("请求登陆的返回")
             console.log(res)
-            if (res) {
+            if(res){
                 setToken(res.id)
                 commit('set_userId', res.id)
-                commit('set_token', res.id)
-                dispatch('getUserInfo').then(() => {
-                    if (state.userInfo.userType === 'Admin') {
-                        router.push({ name: 'Admin' })
-                    } else {
-                        router.push({ name: "BlogHome" })
+                commit('set_token',res.id)
+                dispatch('getUserInfo').then(()=>{
+                    if(state.userInfo.userType==='Admin'){
+                        router.push({name:'Admin'})
+                    }else{
+                        router.push({name:"BlogHome"})
                     }
                 })
                 Message.success("登陆成功")
-            } else {
+            }else{
                 Message.error("登陆失败")
             }
         },
-        register: async ({ commit }, data) => {
+        register: async({ commit }, data) => {
             const res = await registerAPI(data)
             console.log(res)
-            if (res) {
+            if(res){
                 Message.success('注册成功')
             }
         },
         getUserInfo({ state, commit }) {
             return new Promise((resolve, reject) => {
-                getUserInfoAPI(state.userId).then(response => {
-                    const data = response
-                    if (!data) {
-                        reject('登录已过期，请重新登录')
-                    }
-                    console.log(data)
-                    commit('set_userInfo', data)
-                    commit('set_userId', data.id)
-                    resolve(data)
-                }).catch(error => {
-                    reject(error)
-                })
+              getUserInfoAPI(state.userId).then(response => {
+                const data = response
+                if (!data) {
+                  reject('登录已过期，请重新登录')
+                }
+                console.log(data)
+                commit('set_userInfo', data)
+                commit('set_userId', data.id)
+                resolve(data)
+              }).catch(error => {
+                reject(error)
+              })
             })
         },
-        updateUserInfo: async ({ state, dispatch }, data) => {
+        getUserArticle: async({ state,commit }) => {
+            const res = await getUserArticleAPI(state.userId)
+            if(res){
+                commit('set_userArticleList', res)
+                console.log('用户文章获取成功',res)
+            }
+        },
+        updateUserInfo: async({ state, dispatch }, data) => {
             const params = {
                 id: state.userId,
                 ...data,
             }
             const res = await updateUserInfoAPI(params)
-            if (res) {
+            if(res){
                 Message.success('修改成功')
                 dispatch('getUserInfo')
             }
         },
-        logout: async ({ commit }) => {
+        logout: async({ commit }) => {
             removeToken()
             resetRouter()
             commit('reset_state')
         },
-        // remove token
+          // remove token
         resetToken({ commit }) {
             return new Promise(resolve => {
                 removeToken() // must remove  token  first
@@ -138,22 +140,6 @@ const user = {
                 resolve()
             })
         },
-        addArticle({ commit, state, dispatch }, data) {
-            return new Promise((resolve, reject) => {
-                addArticleAPI(data).then(response => {
-                    const data = response
-                    if (!data) {
-                        reject('失败')
-                    }else{
-                        console.log(data)
-                        resolve(data)
-                        dispatch('getArticleById',state.userId)
-                    }
-                }).catch(error => {
-                    reject(error)
-                })
-            })
-        }
     }
 }
 

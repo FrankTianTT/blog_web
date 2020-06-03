@@ -2,7 +2,7 @@
     <div>
         <base-header></base-header>
         <el-container>
-        <el-main class="me-articles">
+        <el-main>
             <article-item v-for="a in articleList" :key="a.id" v-bind="a"></article-item>
         </el-main>
         <el-aside>
@@ -22,7 +22,6 @@
         name:"Home",
         data() {
             return {
-                articles: []
             };
         },
         computed:{
@@ -30,7 +29,6 @@
         },
         async mounted() {
             this.getArticleList();
-            // this.getUserInfo();
         },
         methods: {
             ...mapActions(["getArticleList"]),

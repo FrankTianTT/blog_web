@@ -3,7 +3,7 @@ const getters = {
   token: state => state.user.token,
   userId: state => state.user.userId,
   userInfo: state => state.user.userInfo,
-  userBlogList: state=>state.user.userBlogList,
+  userArticleList: state=>state.user.userArticleList,
   userCommentList:state=>state.user.userCommentList,
   //admin
   userList:state => state.admin.userList,

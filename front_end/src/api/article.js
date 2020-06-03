@@ -15,3 +15,9 @@ export function getArticleListAPI(){
         method: 'GET'
     })
 }
+export function getArticleByTimeAPI(year,month){
+    return axios({
+        url: `${api.articlePre}/{year}/{month}/`,
+        method: 'GET'
+    })
+}

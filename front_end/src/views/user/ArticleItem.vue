@@ -3,19 +3,16 @@
         <div class="me-article-header">
             <a @click="view(id)" class="me-article-title">{{title}}</a>
             <span class="me-pull-right me-article-count">
-                {{commentCounts}}评论
-            </span>
-            <span class="me-pull-right me-article-count">
-                {{viewTimes}}查看
+                {{this.comments===null?0:comments.length}}评论
             </span>
         </div>
 
             <div class="me-artile-description">
-            {{summary}}
+            {{this.content.substring(0,20) + '...'}}
         </div>
         <div class="me-article-footer">
 	  	    <span class="me-article-author">
-	    	<i class="me-icon-author"></i>&nbsp;作者：{{author}}
+	    	<i class="me-icon-author"></i>&nbsp;作者：{{userName}}
 	    </span>
             <span class="me-pull-right me-article-count">
 	    	<i class="el-icon-time"></i>&nbsp;{{createDate}}
@@ -32,15 +29,9 @@
     import { mapGetters, mapActions } from "vuex";
     export default {
         name:"ArticleItem",
-        created() {
-          this.getAuthor()
-        },
         async mounted() {
             this.getUserList();
             this.getUserInfo();
-            this.getAuthor();
-            this.calCommentCounts();
-            this.setSummary()
         },
         computed:{
             ...mapGetters(['userList',"articleList"]),
@@ -54,13 +45,12 @@
             label:String,
             viewTimes: Number,
             createDate: String,
-            comments:Array
+            comments:Array,
+            userName:String
         },
         data() {
             return {
-                author:String,
                 commentCounts:Number,
-                summary:String
             }
         },
         methods: {
@@ -68,21 +58,6 @@
             view(id) {
                 this.$router.push({path: `/view/${id}`})
             },
-            getAuthor(){
-                for(let i=0;i<this.userList.length;i++){
-                    if(this.userList[i].id===this.userId){
-                        this.author=this.userList[i].userName
-                        break
-                    }
-                }
-            },
-            calCommentCounts(){
-                if (this.comments===null)this.commentCounts = 0
-                else this.commentCounts = this.comments.length
-            },
-            setSummary(){
-                this.summary = this.content.substring(0,20) + '...'
-            }
         }
     }
 </script>
