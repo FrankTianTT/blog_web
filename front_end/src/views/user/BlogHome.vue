@@ -13,7 +13,7 @@
 
 <script>
 import CardMe from '@/views/user/CardMe'
-import ArticleItem from '@/views/user/ArticleItem'
+import ArticleItem from '@/views/user/components/ArticleItem'
 import { mapGetters, mapActions} from "vuex";
 
 export default {
@@ -23,17 +23,13 @@ export default {
           tip:String
       };
     },
-    created() {
+    mounted() {
         this.loadTip()
     },
     computed:{
       ...mapGetters(["userArticleList"]),
     },
-    async mounted() {
-      this.getUserArticle()
-    },
     methods: {
-      ...mapActions(["getUserArticle"]),
         loadTip(){
             if(this.userArticleList.length===0){
                 this.tip = "你暂时还有没写过文章，快去写一篇吧！"

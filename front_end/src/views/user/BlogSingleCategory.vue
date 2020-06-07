@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import ArticleItem from '@/views/user/ArticleItem'
+import ArticleItem from '@/views/user/components/ArticleItem'
 import { mapGetters, mapActions} from "vuex";
 export default {
     name: "BlogSingleCategory",

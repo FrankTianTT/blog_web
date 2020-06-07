@@ -19,22 +19,20 @@
 </template>
 
 <script>
-import ArticleItem from '@/views/user/ArticleItem'
+import ArticleItem from '@/views/user/components/ArticleItem'
 import { mapGetters, mapActions} from "vuex";
 export default {
     name: "BlogArchive",
     computed:{
         ...mapGetters(["userArticleList"]),
     },
-    async mounted() {
-        this.getUserArticle();
-    },
     components: {
         'article-item': ArticleItem
     },
-    created() {
+    mounted(){
         this.initPage();
-        this.calArchivesList()
+        this.calArchivesList();
+        this.getUserArticle()
     },
     data() {
         return {

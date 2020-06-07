@@ -16,7 +16,7 @@
 
 <script>
     import BaseHeader from "../components/BaseHeader";
-    import ArticleItem from '@/views/user/ArticleItem'
+    import ArticleItem from '@/views/user/components/ArticleItem'
     import { mapGetters, mapActions} from "vuex";
     export default {
         name:"Home",
@@ -26,9 +26,6 @@
         },
         computed:{
             ...mapGetters(["articleList"]),
-        },
-        async mounted() {
-            this.getArticleList();
         },
         methods: {
             ...mapActions(["getArticleList"]),

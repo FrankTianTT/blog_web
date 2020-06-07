@@ -82,6 +82,7 @@ const user = {
                     }
                 })
                 Message.success("登陆成功")
+                dispatch('getUserArticle')
             }else{
                 Message.error("登陆失败")
             }
