@@ -47,6 +47,10 @@ public class AdminServiceImpl implements AdminService {
 
     }
 
+    @Override
+    public void DelComments(int id) {
+        adminMapper.DelComments(id);
+    }
 
 
     private final static String ACCOUNT_EXIST = "账号已存在";
