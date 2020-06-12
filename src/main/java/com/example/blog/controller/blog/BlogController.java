@@ -2,6 +2,7 @@ package com.example.blog.controller.blog;
 
 import com.example.blog.bl.blog.BlogService;
 import com.example.blog.vo.BlogVO;
+import com.example.blog.vo.CommentVO;
 import com.example.blog.vo.ResponseVO;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,7 @@ public class BlogController {
     public ResponseVO retrieveBlogComments(@PathVariable Integer blogId) {
         return ResponseVO.buildSuccess(blogService.retrieveBlogComments(blogId));
     }
+
 
     @GetMapping("/{year}/{month}")
     public ResponseVO getBlogByTime(@PathVariable int year, @PathVariable int month){

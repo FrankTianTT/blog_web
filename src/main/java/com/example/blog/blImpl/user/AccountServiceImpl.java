@@ -65,8 +65,8 @@ public class AccountServiceImpl implements AccountService {
     public ResponseVO makeComment(int id, CommentVO commentVO){
         try {
             Comment comment = new Comment();
-            comment.setBlogId(commentVO.getBlogId());
             comment.setUserId(id);
+            comment.setBlogId(commentVO.getBlogId());
             comment.setAuthorName(commentVO.getAuthorName());
             comment.setContent(commentVO.getContent());
             comment.setDatetime(commentVO.getDatetime());

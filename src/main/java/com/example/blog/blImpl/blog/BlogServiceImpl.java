@@ -33,7 +33,11 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public List<BlogVO> retrieveBlogs(){
-        return blogMapper.selectAllBlog();
+        List<BlogVO> blogs = blogMapper.selectAllBlog();
+        for(BlogVO blog: blogs){
+            blog.setComments(blogMapper.selectAllBlogComments(blog.getId()));
+        }
+        return blogs;
     }
 
     @Override
