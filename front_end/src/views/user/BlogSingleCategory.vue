@@ -18,7 +18,7 @@ export default {
     },
     methods: {
         initPage(){
-            this.category = this.$route.query.id
+            this.category = this.$route.query.categorysId
             for(let i=0;i<this.userArticleList.length;i++){
                 if(this.userArticleList[i].categoryId === this.category){
                     this.article.push(this.userArticleList[i])

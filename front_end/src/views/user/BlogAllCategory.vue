@@ -1,7 +1,7 @@
 <template>
         <el-container class="me-allct-container">
             <el-main>
-                <li v-for="c in categorys" @click="view(c.id)" :key="c.id" class="me-allct-item">
+                <li v-for="c in categorys" @click="view(c.categorysId)" :key="c.categorysId" class="me-allct-item">
                     <div class="me-allct-content">
                         <a class="me-allct-info">
                             <img class="me-allct-img" :src="c.img"/>
@@ -47,14 +47,14 @@ export default {
             let c = ['日记', '技术','学习','美食','旅游','生活','时尚','文学']
             let img = [img1,img2,img3,img4,img5,img6,img7,img8]
             for(let i=0;i<c.length;i++){
-                this.categorys.push({'id':i+1,'img':img[i],'categoryname':c[i],'articles':0})
+                this.categorys.push({'categorysId':i+1,'img':img[i],'categoryname':c[i],'articles':0})
             }
             for(let i=0;i<this.userArticleList.length;i++){
                 this.categorys[this.userArticleList[i].categoryId-1].articles += 1
             }
         },
-        view(id) {
-            this.$router.push({path: `category`,query: {id}})
+        view(categorysId) {
+            this.$router.push({path: `category`,query: {categorysId}})
         },
     },
 }

@@ -98,6 +98,14 @@ const routes = [
         meta: {
           title: "文章归档"
         }
+      },
+      {
+        path: '/view',
+        name: 'ShowAtricle',
+        component: () => import("@/views/user/components/ShowArticle"),
+        meta: {
+          title: "文章归档"
+        }
       }
     ]
   }

@@ -29,13 +29,6 @@
     import { mapGetters, mapActions } from "vuex";
     export default {
         name:"ArticleItem",
-        async mounted() {
-            this.getUserList();
-            this.getUserInfo();
-        },
-        computed:{
-            ...mapGetters(['userList',"articleList"]),
-        },
         props:{
             id:Number,
             userId:Number,
@@ -54,9 +47,8 @@
             }
         },
         methods: {
-            ...mapActions(["getUserList","getUserInfo"]),
             view(id) {
-                this.$router.push({path: `/view/${id}`})
+                this.$router.push({path: `/view`,query: {id}})
             },
         }
     }
