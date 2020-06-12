@@ -81,12 +81,17 @@ export default {
         content: "",
         categoryId: "",
         labels: [],
-        createDate: ""
+        createDate: "",
       },
       categorys: [
-        { value: 1, label: "前端" },
-        { value: 2, label: "后端" },
-        { value: 3, label: "生活" }
+        { value: 1, label: "日记" },
+        { value: 2, label: "技术" },
+        { value: 3, label: "学习" },
+        { value: 4, label: "美食" },
+        { value: 5, label: "旅游" },
+        { value: 6, label: "生活" },
+        { value: 7, label: "时尚" },
+        { value: 8, label: "文学" },
       ],
       tags: [
         { value: "标签1", label: "标签1" },
@@ -95,7 +100,7 @@ export default {
     };
   },
   computed:{
-    ...mapGetters(['userId'])
+    ...mapGetters(['userId',"userName"])
   },
   methods: {
     ...mapActions(['addArticle']),
@@ -129,14 +134,15 @@ export default {
         Message.error("请添加文章分类");
         return;
       }
-      
+      // const create_date = new Date().toLocaleDateString().replace(/\//g,"-");
       const data = {
         userId:this.userId,
         categoryId:this.articleForm.categoryId,
         title:this.articleForm.title,
         content:this.articleForm.content,
         label:this.articleForm.labels.join(" "),
-        createDate:new Date().toLocaleDateString()
+        userName:this.userName,
+        categoryName:this.categorys[this.articleForm.categoryId-1].label
       };
       console.log(data);
       this.addArticle(data);

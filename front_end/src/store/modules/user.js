@@ -10,6 +10,9 @@ import {
     getUserArticleAPI,
     updateUserInfoAPI,
 } from '@/api/user'
+import {
+    addArticleAPI
+} from "@/api/article"
 const getDefaultState = () => {
     return {
         userId: '',
@@ -141,6 +144,14 @@ const user = {
                 resolve()
             })
         },
+        addArticle: async ({state,dispatch},data)=>{
+            const res = await addArticleAPI(data);
+            if(res){
+                dispatch("getUserArticle");
+                Message.success("文章添加成功");
+                router.push({name:"BlogHome"});
+            }
+        }
     }
 }
 

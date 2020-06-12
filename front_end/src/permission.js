@@ -14,6 +14,7 @@ router.beforeEach(async (to, from, next) => {
         store.commit('set_token', hasToken)
         store.dispatch('getUserArticle')
         store.dispatch('getArticleList')
+        store.dispatch('getUserInfo')
         if (to.path === '/login') {
             // if is logged in, redirect to the home page
             next({ path: '/' })
