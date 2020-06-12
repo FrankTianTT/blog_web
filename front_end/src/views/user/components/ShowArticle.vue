@@ -2,7 +2,7 @@
     <div class="me-view-body">
         <el-container class="me-view-container">
             <el-main>
-                <div class="me-view-card">
+                <div>
                     <h1 class="me-view-title">{{title}}</h1>
                     <div class="me-view-author">
                         <a class="">
@@ -11,15 +11,13 @@
                         <div class="me-view-info">
                             <span>{{authorName}}</span>
                             <div class="me-view-meta">
-                                <span>时间{{createDate}}</span>
-                                <span>评论{{this.comments===null?0:comments.length}}</span>
+                                时间{{createDate}} 评论{{this.comments===null?0:comments.length}}
                             </div>
 
                         </div>
                         <el-button
                                 v-if="String(this.authorId) === String(this.userId)"
                                 @click="editArticle()"
-                                style="position: absolute;left: 60%;"
                                 size="mini"
                                 round
                                 icon="el-icon-edit">编辑</el-button>
@@ -104,11 +102,11 @@ export default {
 
 <style>
     .me-view-body {
-        margin: 100px auto 140px;
+        margin: 50px auto 140px;
     }
 
     .me-view-container {
-        width: 700px;
+        margin: 0 auto;
     }
 
     .el-main {
@@ -151,6 +149,9 @@ export default {
         margin-top: 20px;
     }
 
+    me-view-content{
+        vertical-align: middle;
+    }
     .me-view-tag {
         margin-top: 20px;
         padding-left: 6px;
