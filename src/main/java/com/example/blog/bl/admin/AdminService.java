@@ -69,4 +69,10 @@ public interface AdminService {
 
     List<User> getAllUsers();
 
+    /**
+     * 根据id删除评论
+     * @param id
+     */
+    void DelComments(int id);
+
 }
