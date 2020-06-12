@@ -80,14 +80,29 @@ const routes = [
         name: 'categoryAll',
         component: () => import("@/views/user/BlogAllCategory"),
         meta: {
-          title: "文章分类"
+          title: "文章类别"
         }
       },
-      ,
+      {
+        path: '/user/category',
+        name: 'categorySingle',
+        component: () => import("@/views/user/BlogSingleCategory"),
+        meta: {
+          title: "文章分类单页"
+        }
+      },
       {
         path: '/user/archives',
         name: 'Archives',
         component: () => import("@/views/user/BlogArchives"),
+        meta: {
+          title: "文章归档"
+        }
+      },
+      {
+        path: '/view',
+        name: 'ShowAtricle',
+        component: () => import("@/views/user/components/ShowArticle"),
         meta: {
           title: "文章归档"
         }

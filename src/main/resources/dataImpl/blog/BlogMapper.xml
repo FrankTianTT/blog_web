@@ -3,7 +3,7 @@
 <mapper namespace="com.example.blog.data.blog.BlogMapper">
     <insert id="insertBlog" parameterType="com.example.blog.po.Blog" useGeneratedKeys="true" keyProperty="id">
         insert into Blog(userId, categoryId, userName, categoryName, title, content, label, view_times, create_date)
-        values (#{userId},#{categoryId},#{userName},#{title},#{content},#{label},#{viewTimes},#{createDate})
+        values (#{userId},#{categoryId},#{userName},#{categoryName},#{title},#{content},#{label},#{viewTimes},#{createDate})
     </insert>
     <select id="selectAllBlog" resultMap="Blog">
         select * from blog

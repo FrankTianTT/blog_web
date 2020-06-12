@@ -4,8 +4,25 @@
     <select id="getAllUsers" resultMap="User">
         select * from User
     </select>
+    <insert id="addUser" parameterType="com.example.blog.po.User"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into User(email, password, userName, userType, profile, qqNumber)
+        values(#{email},#{password},#{userName},#{userType},#{profile},#{qqNumber})
+    </insert>
 
+    <delete id="DelUser" parameterType="java.lang.Integer">
+        delete from user where id=#{id}
+    </delete>
 
+    <insert id="addBlog" parameterType="com.example.blog.po.Blog"
+            useGeneratedKeys="true" keyProperty="id">
+         insert into Blog(userId, categoryId, userName, categoryName, title, content, label, view_times, create_date)
+        values (#{userId},#{categoryId},#{userName},#{title},#{content},#{label},#{viewTimes},#{createDate})
+    </insert>
+
+    <delete id="DelBlog" parameterType="java.lang.Integer">
+        delete from blog where id=#{id}
+    </delete>
     <resultMap id="User" type="com.example.blog.po.User">
         <id column="id" property="id"></id>
         <result column="email" property="email"></result>

@@ -1,49 +1,47 @@
-
 <template>
-  <div v-title data-title="BlogHome">
     <el-container>
-      <el-main class="me-articles">
-        <article-item v-for="a in articles" :key="a.id" v-bind="a"></article-item>
+      <el-main>
+          <div class="me-month-title">{{tip}}</div>
+        <article-item v-for="a in userArticleList" :key="a.id" v-bind="a"></article-item>
       </el-main>
       <el-aside>
         <card-me class="me-area"></card-me>
       </el-aside>
 
     </el-container>
-  </div>
 </template>
 
 <script>
 import CardMe from '@/views/user/CardMe'
-import ArticleItem from '@/views/user/ArticleItem'
+import ArticleItem from '@/views/user/components/ArticleItem'
 import { mapGetters, mapActions} from "vuex";
 
 export default {
     name:'BlogHome',
     data() {
       return {
-        articles:[]
+          tip:String
       };
     },
-    computed:{
-      ...mapGetters(['userInfo',"articleList"]),
+    mounted() {
+        this.loadTip()
     },
-    async mounted() {
-      this.getArticleList();
-      this.getUserInfo();
-      this.loadUserBlog();
+    computed:{
+      ...mapGetters(["userArticleList"]),
     },
     methods: {
-      ...mapActions(["getArticleList","getUserInfo"]),
-      loadUserBlog() {
-        for(var i=0;i<this.articleList.length;i++){
-          if(this.articleList[i].userId===this.userInfo.id) this.articles.push(this.articleList[i])
+        loadTip(){
+            if(this.userArticleList.length===0){
+                this.tip = "你暂时还有没写过文章，快去写一篇吧！"
+            }
+            else{
+                this.tip = ''
+            }
         }
-      }
     },
       components: {
-        'card-me': CardMe,
-        'article-item': ArticleItem,
+          'card-me': CardMe,
+          'article-item': ArticleItem,
       }
 }
 </script>

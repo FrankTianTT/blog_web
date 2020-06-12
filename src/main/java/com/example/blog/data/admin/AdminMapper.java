@@ -39,4 +39,6 @@ public interface AdminMapper {
 
     void DelBlog(int id);
 
+    void DelComments(int id);
+
 }

@@ -16,14 +16,7 @@ import com.example.blog.vo.UserForm;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.web.bind.annotation.PostMapping;
-
-import org.springframework.web.bind.annotation.RequestBody;
-
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController()
@@ -54,9 +47,9 @@ public class AdminController {
 
 
 
-    @PostMapping("/DelUser/{userid}")
+    @PostMapping("/DelUser/{id}")
 
-    public ResponseVO DelUser(@RequestBody Integer id){
+    public ResponseVO DelUser(@PathVariable("id") Integer id){
 
         return ResponseVO.buildSuccess(adminService.DelUser(id));
     }
@@ -70,14 +63,20 @@ public class AdminController {
 
 
 
-    @PostMapping("/DelBlog/{blogid}")
-    public ResponseVO DelBlog(@RequestBody int id){
+    @PostMapping("/DelBlog/{id}")
+    public ResponseVO DelBlog(@PathVariable("id") int id){
         return adminService.DelBlog(id);
     }
 
     @PostMapping("/getAllComments")
     public ResponseVO getAllComments(){
         return ResponseVO.buildSuccess(adminService.getAllComments());
+    }
+
+    @PostMapping("/DelComments/{hotelID}")
+    public ResponseVO DelCommentsById(@PathVariable int id){
+        adminService.DelComments(id);
+        return ResponseVO.buildSuccess(true);
     }
 
 }

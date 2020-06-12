@@ -39,7 +39,9 @@
 
         <template v-else>
           <el-menu-item index="/user/blogHome">
-              <el-avatar size="medium" src="@/assets/logo.png"></el-avatar>
+            <el-avatar size="medium" src="@/assets/logo.png">
+            </el-avatar>
+              <el-label>{{userName}}</el-label>
           </el-menu-item>
           <el-menu-item @click="handleLogout">
             <i class="el-icon-back"></i>退出
@@ -68,7 +70,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["token"])
+    ...mapGetters(["token", "userName"])
     // hasToken() {
     //   return this.token === null;
     // }

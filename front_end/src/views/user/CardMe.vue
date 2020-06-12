@@ -3,9 +3,9 @@
         <h1 class="me-author-name">{{this.userInfo.userName}}</h1>
         <div class="me-author-description">
             <div>联系我</div>
-            <div>QQ: {{this.qqNumber}}</div>
+            <div>QQ: {{userInfo.qqNumber==null?"暂时没有联系方式":userInfo.qqNumber}}</div>
             <div>关于我</div>
-            <div>{{this.profile}}</div>
+            <div>{{userInfo.profile==null?"暂时没有介绍":userInfo.profile}}</div>
         </div>
     </el-card>
 </template>
@@ -16,27 +16,16 @@
         name: 'CardMe',
         data() {
             return {
-                qqNumber,
-                profile
             };
         },
         computed:{
             ...mapGetters(['userInfo']),
         },
         async mounted() {
-            this.getUserInfo();
-        },
-        created() {
-            this.showUserInfo()
+            //this.getUserInfo();
         },
         methods: {
             ...mapActions(["getUserInfo"]),
-            showUserInfo(){
-                if (this.userInfo.qqNumber!=null) this.qqNumber = this.userInfo.qqNumber
-                else this.qqNumber = "暂时没有联系方式"
-                if (this.userInfo.profile!=null) this.profile = this.userInfo.profile
-                else this.profile = "暂时没有介绍"
-            }
         },
     }
 </script>

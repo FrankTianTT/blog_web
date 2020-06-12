@@ -23,6 +23,8 @@ public class BlogServiceImpl implements BlogService {
         Blog blog = new Blog();
         blog.setUserId(blogVO.getUserId());
         blog.setCategoryId(blogVO.getCategoryId());
+        blog.setCategoryName(blogVO.getCategoryName());
+        blog.setUserName(blogVO.getUserName());
         blog.setTitle(blogVO.getTitle());
         blog.setContent(blogVO.getContent());
         blog.setLabel(blogVO.getLabel());
