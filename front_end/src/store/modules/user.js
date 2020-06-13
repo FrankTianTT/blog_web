@@ -9,6 +9,7 @@ import {
     getUserInfoAPI,
     getUserArticleAPI,
     updateUserInfoAPI,
+    makeCommentAPI,
 } from '@/api/user'
 import {
     addArticleAPI
@@ -150,6 +151,13 @@ const user = {
                 dispatch("getUserArticle");
                 Message.success("文章添加成功");
                 router.push({name:"BlogHome"});
+            }
+        },
+        addComment: async ({state,dispatch},data)=>{
+            const res = await makeCommentAPI(state.userId,data);
+            if(res){
+                dispatch("getUserArticle");
+                Message.success("评论添加成功");
             }
         }
     }

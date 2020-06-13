@@ -21,3 +21,9 @@ export function getArticleByTimeAPI(year,month){
         method: 'GET'
     })
 }
+export function getComments(articleId) {
+    return axios({
+        url: `${api.articlePre}/${articleId}/comments`,
+        method: `GTE`,
+    })
+}

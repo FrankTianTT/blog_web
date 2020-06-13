@@ -1,5 +1,5 @@
 <template>
-    <el-container>
+    <el-container class="el-container">
         <el-main>
             <div class="me-month-title">{{tip}}</div>
             <article-item v-for="a in article" :key="a.id" v-bind="a"></article-item>
@@ -54,7 +54,7 @@ export default {
 
 <style scoped>
     .el-container {
-        margin-left: 100px;
+        margin: 0 auto;
         width: 1200px;
     }
 

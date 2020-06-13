@@ -21,12 +21,6 @@
         computed:{
             ...mapGetters(['userInfo']),
         },
-        async mounted() {
-            //this.getUserInfo();
-        },
-        methods: {
-            ...mapActions(["getUserInfo"]),
-        },
     }
 </script>
 

@@ -36,3 +36,10 @@ export function updateUserInfoAPI(data) {
         data
     })
 }
+export function makeCommentAPI(id,data) {
+    return axios({
+        url: `${api.userPre}/${id}/makeComment`,
+        method: 'POST',
+        data
+    })
+}

@@ -11,13 +11,6 @@ export function getAllCommentsAPI() {
     })
 }
 
-export function getCommentsByHotelIdAPI(param) {
-    return axios({
-        url: `${api.commentPre}/allCommentsOfHotel`,
-        method: `GTE`,
-    })
-}
-
 export function getCommentsByUserIdAPI(param) {
     return axios({
         url: `${api.commentPre}/allCommentsOfUser`,
@@ -25,10 +18,17 @@ export function getCommentsByUserIdAPI(param) {
     })
 }
 
-export function addCommentAPI(data) {
+export function addCommentByArticleAPI(data) {
     return axios({
         url: `${api.commentPre}/addComment`,
         method: 'POST',
         data
+    })
+}
+
+export function getCommentsByArticleAPI(articleId) {
+    return axios({
+        url: `${api.commentPre}/${articleId}/Comments`,
+        method: `GTE`,
     })
 }

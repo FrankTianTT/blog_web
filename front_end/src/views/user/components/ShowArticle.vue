@@ -1,5 +1,5 @@
-<template>
-    <div class="me-view-body">
+<template >
+    <div class="me-view-body" >
         <el-container class="me-view-container">
             <el-main>
                 <div>
@@ -28,13 +28,52 @@
 
                     <div class="me-view-end">
                         <el-alert
-                                title="文章End..."
+                                title="文章结束"
                                 type="success"
                                 center
                                 :closable="false">
                         </el-alert>
                     </div>
 
+                    <div class="me-view-tag">
+                        标签：
+                        <el-button @click="goLabel()" size="mini" type="primary" v-for="t in label" :key="t.id" round plain>{{t.labelname}}</el-button>
+                    </div>
+                    <div class="me-view-tag">
+                        文章分类：
+                        <el-button @click="goCategory(categoryId)" size="mini" type="primary"  round plain>{{categoryName}}</el-button>
+                    </div>
+
+                    <div class="me-view-comment">
+                        <div class="me-view-comment-write">
+                            <el-row :gutter="20">
+                                <el-col :span="2">
+                                    <a class="">
+                                        <img class="me-view-picture" :src="avatar"></img>
+                                    </a>
+                                </el-col>
+                                <el-col :span="22">
+                                    <el-input
+                                            type="textarea"
+                                            :autosize="{ minRows: 2}"
+                                            placeholder="你的评论..."
+                                            class="me-view-comment-text"
+                                            v-model="comment.content"
+                                            resize="none">
+                                    </el-input>
+                                </el-col>
+                            </el-row>
+                                    <el-button type="text" @click="publishComment()">提交</el-button>
+
+                        </div>
+
+                        <div class="me-view-comment-title">
+                            <span style="float: left;clear: left">{{this.comments===null?0:comments.length}} 条评论</span>
+                        </div>
+                        <div>
+                            <comment-item v-for="c in comments" :key="c.id" v-bind="c"></comment-item>
+                        </div>
+                    </div>
                 </div>
             </el-main>
         </el-container>
@@ -46,6 +85,9 @@ import { mapGetters, mapActions} from "vuex";
 import MarkdownEditor from '@/views/user/components/MarkdownEditor'
 import authorImg from '@/assets/img/author_img.jpeg'
 import defaultAvatar from '@/assets/img/default_avatar.png'
+import CommentItem from "./CommentItem";
+import {Message} from "element-ui";
+import moment from 'moment';
 export default {
     name: "ShowArticle",
     created() {
@@ -56,57 +98,99 @@ export default {
             title:"",
             authorName:"",
             authorId:0,
-            label:"",
+            label:[],
             comments:[],
+            categoryName:"",
             authorImgSrc:authorImg,
             createDate:"",
+            categoryId:Number,
             editor: {
                 value: '',
                 toolbarsFlag: false,
                 subfield: false,
                 defaultOpen: 'preview'
             },
-            avatar:"default_avatar"
+            avatar:defaultAvatar,
+            comment: {
+                id:Number,
+                content: ''
+            }
         };
     },
     computed:{
-        ...mapGetters(["articleList","userId"]),
+        ...mapGetters(["articleList","userId","userInfo"]),
     },
     methods: {
+        ...mapActions(['addComment']),
         initPage(){
-            this.pageId = this.$route.query.id
+            this.blogId = this.$route.query.id
             for(let i=0;i<this.articleList.length;i++){
-                if (String(this.articleList[i].id)===String(this.pageId)){
+                if (String(this.articleList[i].id)===String(this.blogId)){
                     this.editor.value = this.articleList[i].content
                     this.title = this.articleList[i].title
                     this.authorName = this.articleList[i].userName
-                    this.label = this.articleList[i].label
-                    this.comments = this.articleList[i].comments
+                    let labels = this.articleList[i].label.trim().split(" ")
+                    for(let i=0;i<labels.length;i++){
+                        this.label.push({id:i,labelname:labels[i]})
+                    }
+                    let comments = this.articleList[i].comments
+                    for(let i=0;i<comments.length;i++){
+                        this.comments.push({id:i+1,'authorName':comments[i].authorName,'content':comments[i].content,'datetime':comments[i].datetime})
+                    }
                     this.createDate = this.articleList[i].createDate
                     this.authorId = this.articleList[i].userId
+                    this.categoryName = this.articleList[i].categoryName
+                    this.categoryId = this.articleList[i].categoryId
                     console.log("get article success")
                     break
                 }
             }
+            console.log(this.label)
+            console.log(this.comments)
         },
         editArticle() {
 
         },
+        goCategory(categorysId){
+            this.$router.push({path: `/user/category`,query: {categorysId}})
+        },
+        goLabel(){
+
+        },
+        publishComment(){
+            console.log(this.comment)
+            if(this.comment.content === ""){
+                Message.error("评论不能为空");
+            }
+            else{
+                const nowDate = new Date().getTime()
+                const data = {
+                    blogId:this.blogId,
+                    authorName:this.userInfo.userName,
+                    content:this.comment.content,
+                    datetime:moment(nowDate).format('YYYY-MM-DD HH:mm:ss'),
+                };
+                this.addComment(data);
+                location.reload()
+            }
+        },
     },
     components:{
         'markdown-editor': MarkdownEditor,
+        'comment-item':CommentItem
     }
-
 }
 </script>
 
 <style>
     .me-view-body {
-        margin: 50px auto 140px;
+        margin: 0px auto 140px;
+        background-color:  white;
     }
 
     .me-view-container {
         margin: 0 auto;
+        width: 800px;
     }
 
     .el-main {
@@ -146,16 +230,17 @@ export default {
     }
 
     .me-view-end {
-        margin-top: 20px;
+        margin: 10px auto;
     }
 
-    me-view-content{
-        vertical-align: middle;
+    .me-view-content{
+        margin: 10px auto;
     }
     .me-view-tag {
         margin-top: 20px;
-        padding-left: 6px;
+        float: left;
         border-left: 4px solid #c5cac3;
+        clear:left;
     }
 
     .me-view-tag-item {
@@ -163,7 +248,7 @@ export default {
     }
 
     .me-view-comment {
-        margin-top: 60px;
+        margin-top: 150px;
     }
 
     .me-view-comment-title {

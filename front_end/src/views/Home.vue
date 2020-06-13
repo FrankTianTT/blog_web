@@ -1,7 +1,7 @@
 <template>
     <div>
         <base-header></base-header>
-        <el-container>
+        <el-container class="el-container">
         <el-main>
             <article-item v-for="a in articleList" :key="a.id" v-bind="a"></article-item>
         </el-main>
@@ -41,7 +41,7 @@
 <style scoped>
 
     .el-container {
-        margin-left: 100px;
+        margin: 0 auto;
         width: 1200px;
     }
 

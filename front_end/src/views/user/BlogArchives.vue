@@ -98,7 +98,7 @@ export default {
 <style scoped>
 
 .el-container {
-    margin-left: 100px;
+    margin: 0 auto;
     width: 1200px;
 }
 
