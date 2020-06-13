@@ -12,7 +12,8 @@ const getters = {
   addUserParams: state => state.admin.addUserParams,
   editUserModalVisible:state => state.admin.editUserModalVisible,
   currentUserInfo:state => state.admin.currentUserInfo,
-  articleList:state => state.admin.articleList
+  articleList:state => state.admin.articleList,
+  commentsList:state=>state.admin.commentsList
   }
   
   export default getters

@@ -1,7 +1,10 @@
 import {
     getUserListAPI,
     addManagerAPI,
-    deleteUserAPI
+    deleteUserAPI,
+    getAllCommentsAPI,
+    deleteCommentsAPI,
+    deleteArticleAPI
 } from '@/api/admin'
 import {
     registerAPI,
@@ -29,7 +32,8 @@ const admin = {
         },
         editUserModalVisible: false,
         currentUserInfo: {},
-        articleList:[]
+        articleList:[],
+        commentsList:[]
     },
     mutations: {
         set_userList: function (state, data) {
@@ -55,6 +59,9 @@ const admin = {
         },
         set_articleList: function (state,data) {
             state.articleList = data
+        },
+        set_commentsList(state,data){
+            state.commentsList = data;
         }
     },
     actions: {
@@ -104,12 +111,33 @@ const admin = {
                 Message.error("获取文章列表出错");
             }
         },
+        deleteArticle:async({dispatch},data)=>{
+            const res = await deleteArticleAPI(data);
+            console.log("删除文章接口");
+            if(res){
+                Message.success("删除文章成功");
+                dispatch("getArticleList");
+            }
+        },
         deleteUser:async ({dispatch},data)=>{
             const res = await deleteUserAPI(data);
             if(res){
                 dispatch('getUserList');
             }else{
                 Message.error("删除失败");
+            }
+        },
+        getAllComments: async({state,commit})=>{
+            const res = await getAllCommentsAPI();
+            if(res){
+                commit("set_commentsList",res);
+            }
+        },
+        deleteComments:async({state,dispatch},data)=>{
+            const res = await deleteCommentsAPI(data);
+            if(res){
+                dispatch("getAllComments");
+                Message.success(res);
             }
         }
     }

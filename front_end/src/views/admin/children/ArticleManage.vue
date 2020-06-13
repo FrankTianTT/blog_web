@@ -25,7 +25,7 @@
                 <el-divider content-position="left">文章内容</el-divider>
                 <span>{{ props.row.content }}</span>
               </el-form-item>
-              <el-form-item >
+              <el-form-item>
                 <el-divider content-position="left">发布时间</el-divider>
                 <span>{{ props.row.createDate }}</span>
               </el-form-item>
@@ -52,7 +52,9 @@
         </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
-            <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+            <el-popconfirm title="确定要删除这篇文章吗" @onConfirm="handleDelete(scope.$index, scope.row)">
+              <el-button slot="reference" size="mini" type="danger">删除</el-button>
+            </el-popconfirm>
           </template>
         </el-table-column>
       </el-table>
@@ -74,13 +76,10 @@ export default {
     this.getArticleList();
   },
   methods: {
-    ...mapActions(["getArticleList"]),
-    handleAdd() {
-      console.log("add article");
-    },
+    ...mapActions(["getArticleList","deleteArticle"]),
     handleDelete(index, row) {
-      console.log("delete article");
-      console.log(row);
+      console.log({id:row.id});
+      this.deleteArticle({id:row.id});
     },
     filterTag(value, row) {
       return row.tag === value;
