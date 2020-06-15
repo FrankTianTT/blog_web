@@ -40,4 +40,13 @@
         <result column="profile" property="profile"></result>
         <result column="qqNumber" property="qqNumber"></result>
     </resultMap>
+
+    <resultMap id="Comment" type="com.example.blog.po.Comment">
+        <id column="id" property="id"></id>
+        <result column="blogId" property="blogId"></result>
+        <result column="userId" property="userId"></result>
+        <result column="authorName" property="authorName"></result>
+        <result column="content" property="content"></result>
+        <result column="datetime" property="datetime"></result>
+    </resultMap>
 </mapper>
