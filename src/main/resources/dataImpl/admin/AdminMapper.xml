@@ -23,6 +23,14 @@
     <delete id="DelBlog" parameterType="java.lang.Integer">
         delete from blog where id=#{id}
     </delete>
+
+    <select id="getAllComments" resultMap="Comment">
+        select * from comment
+    </select>
+
+    <delete id="DelComments" parameterType="java.lang.Integer">
+        delete from comment where id=#{id}
+    </delete>
     <resultMap id="User" type="com.example.blog.po.User">
         <id column="id" property="id"></id>
         <result column="email" property="email"></result>
