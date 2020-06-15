@@ -73,8 +73,8 @@ public class AdminController {
         return ResponseVO.buildSuccess(adminService.getAllComments());
     }
 
-    @PostMapping("/DelComments/{hotelID}")
-    public ResponseVO DelCommentsById(@PathVariable int id){
+    @PostMapping("/DelComments/{id}")
+    public ResponseVO DelCommentsById(@PathVariable("id") int id){
         adminService.DelComments(id);
         return ResponseVO.buildSuccess(true);
     }
