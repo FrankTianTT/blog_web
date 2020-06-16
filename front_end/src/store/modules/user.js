@@ -16,6 +16,7 @@ import {
 } from "@/api/article"
 const getDefaultState = () => {
     return {
+        updateUserInfoModalVisible:false,
         userId: '',
         userInfo: {
 
@@ -66,7 +67,10 @@ const user = {
                 ...state.userCommentList,
                 ...data
             }
-        }
+        },
+        set_updateUserInfoModalVisible: function(state, data) {
+            state.updateUserInfoModalVisible = data
+        },
     },
 
     actions: {

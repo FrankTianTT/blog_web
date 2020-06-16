@@ -5,10 +5,10 @@
                 <div>
                     <h1 class="me-view-title">{{title}}</h1>
                     <div class="me-view-author">
-                        <a class="">
-                            <img class="me-view-picture" :src = "authorImgSrc"></img>
-                        </a>
                         <div class="me-view-info">
+                            <div>
+                                <avatar :username="authorName" :size="40" style="margin: 0 auto"></avatar>
+                            </div>
                             <span>{{authorName}}</span>
                             <div class="me-view-meta">
                                 时间{{createDate}} 评论{{this.comments===null?0:comments.length}}
@@ -49,7 +49,7 @@
                             <el-row :gutter="20">
                                 <el-col :span="2">
                                     <a class="">
-                                        <img class="me-view-picture" :src="avatar"></img>
+                                        <avatar :username="userInfo.userName" :size="40"></avatar>
                                     </a>
                                 </el-col>
                                 <el-col :span="22">
@@ -88,6 +88,7 @@ import defaultAvatar from '@/assets/img/default_avatar.png'
 import CommentItem from "./CommentItem";
 import {Message} from "element-ui";
 import moment from 'moment';
+import Avatar from 'vue-avatar'
 export default {
     name: "ShowArticle",
     created() {
@@ -177,7 +178,8 @@ export default {
     },
     components:{
         'markdown-editor': MarkdownEditor,
-        'comment-item':CommentItem
+        'comment-item':CommentItem,
+        Avatar
     }
 }
 </script>
