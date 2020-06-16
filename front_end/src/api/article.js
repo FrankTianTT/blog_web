@@ -27,3 +27,10 @@ export function getComments(articleId) {
         method: `GTE`,
     })
 }
+export function updateArticleAPI(data){
+    return axios({
+        url: `${api.articlePre}/updateBlog`,
+        method: 'POST',
+        data
+    })
+}

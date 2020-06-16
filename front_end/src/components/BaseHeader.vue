@@ -41,7 +41,7 @@
           <el-menu-item index="/user/blogHome">
             <el-avatar size="medium" src="@/assets/logo.png">
             </el-avatar>
-              <el-label>{{userName}}</el-label>
+              <el-tag>{{userName}}</el-tag>
           </el-menu-item>
           <el-menu-item @click="handleLogout">
             <i class="el-icon-back"></i>退出

@@ -2,10 +2,6 @@
   <div>
     <el-card>
       <el-table :data="commentsList" border style="width: 100%">
-        <el-table-column prop="id" label="id" width="60px"></el-table-column>
-        <el-table-column prop="blogId" label="博客Id"></el-table-column>
-        <el-table-column prop="userId" label="用户Id"></el-table-column>
-        <el-table-column prop="datetime" label="日期"></el-table-column>
         <el-table-column type="expand">
           <template slot-scope="props">
             <el-form class="demo-table-expand">
@@ -20,6 +16,10 @@
             </el-form>
           </template>
         </el-table-column>
+        <el-table-column prop="id" label="id" width="60px"></el-table-column>
+        <el-table-column prop="blogId" label="博客Id"></el-table-column>
+        <el-table-column prop="userId" label="用户Id"></el-table-column>
+        <el-table-column prop="datetime" label="日期"></el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
@@ -48,6 +48,7 @@ export default {
     ...mapActions(["getAllComments","deleteComments"]),
     handleDelete(index,row){
       console.log({id:row.id});
+      this.deleteComments({id:row.id});
     }
   }
 };
