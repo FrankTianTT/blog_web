@@ -39,8 +39,9 @@
 
         <template v-else>
           <el-menu-item index="/user/blogHome">
-              <avatar :username="userName" :size="40" style="float: left">{{userName }}</avatar>
-              <span style="font-size: 14px">{{userName }}</span>
+            <el-avatar size="medium" src="@/assets/logo.png">
+            </el-avatar>
+              <el-tag>{{userName}}</el-tag>
           </el-menu-item>
           <el-menu-item @click="handleLogout">
             <i class="el-icon-back"></i>退出
@@ -53,12 +54,9 @@
 
 <script>
 import { mapGetters, mapActions, mapMutations } from "vuex";
-import Avatar from 'vue-avatar'
+
 export default {
   name: "BaseHeader",
-  components:{
-    Avatar
-  },
   props: {
     activeIndex: String
     // simple: {
