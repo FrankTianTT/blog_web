@@ -24,7 +24,10 @@ export default {
     return {};
   },
   computed: {
-    ...mapGetters(["articleList"])
+    ...mapGetters(["articleList"]),
+  },
+  async mounted(){
+    await this.getArticleList();
   },
   methods: {
     ...mapActions(["getArticleList"])
