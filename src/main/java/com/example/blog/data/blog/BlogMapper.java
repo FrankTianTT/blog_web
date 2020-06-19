@@ -14,6 +14,9 @@ import java.util.List;
 public interface BlogMapper {
     int insertBlog(Blog blog);
 
+    int updateBlog(@Param("id") int id, @Param("categoryId") int categoryId, @Param("categoryName") String categoryName,
+                   @Param("title") String title, @Param("content") String content, @Param("label") String label);
+
     List<BlogVO> selectAllBlog();
 
     BlogVO selectById(@Param("id") Integer id);

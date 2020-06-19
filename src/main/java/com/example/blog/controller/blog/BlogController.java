@@ -20,6 +20,12 @@ public class BlogController {
         return ResponseVO.buildSuccess(true);
     }
 
+    @PostMapping("/updateBlog")
+    public ResponseVO updateBlog(@RequestBody BlogVO blogVO){
+        blogService.updateBlog(blogVO);
+        return ResponseVO.buildSuccess(true);
+    }
+
     @GetMapping("/all")
     public ResponseVO retrieveAllBlogs(){
         return ResponseVO.buildSuccess(blogService.retrieveBlogs());
@@ -34,7 +40,6 @@ public class BlogController {
     public ResponseVO retrieveBlogComments(@PathVariable Integer blogId) {
         return ResponseVO.buildSuccess(blogService.retrieveBlogComments(blogId));
     }
-
 
     @GetMapping("/{year}/{month}")
     public ResponseVO getBlogByTime(@PathVariable int year, @PathVariable int month){

@@ -17,7 +17,7 @@
     <insert id="addBlog" parameterType="com.example.blog.po.Blog"
             useGeneratedKeys="true" keyProperty="id">
          insert into Blog(userId, categoryId, userName, categoryName, title, content, label, view_times, create_date)
-        values (#{userId},#{categoryId},#{userName},#{title},#{content},#{label},#{viewTimes},#{createDate})
+        values (#{userId},#{categoryId},#{userName},#{categoryName},#{title},#{content},#{label},#{viewTimes},#{createDate})
     </insert>
 
     <delete id="DelBlog" parameterType="java.lang.Integer">

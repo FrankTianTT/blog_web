@@ -10,6 +10,8 @@ import java.util.List;
 public interface BlogService {
     void addBlog(BlogVO blogVO);
 
+    void updateBlog(BlogVO blogVO);
+
     List<BlogVO> retrieveBlogs();
 
     BlogVO retrieveBlogDetails(Integer blogId);

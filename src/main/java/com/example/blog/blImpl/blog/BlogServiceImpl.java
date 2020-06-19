@@ -5,6 +5,7 @@ import com.example.blog.data.blog.BlogMapper;
 import com.example.blog.po.Blog;
 import com.example.blog.vo.BlogVO;
 import com.example.blog.vo.CommentVO;
+import com.example.blog.vo.ResponseVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ import java.util.List;
 
 @Service
 public class BlogServiceImpl implements BlogService {
+    private final static String UPDATE_ERROR = "修改失败";
     @Autowired
     private BlogMapper blogMapper;
 
@@ -31,6 +33,12 @@ public class BlogServiceImpl implements BlogService {
         blog.setViewTimes(0);
         blog.setCreateDate(LocalDate.now());
         blogMapper.insertBlog(blog);
+    }
+
+    @Override
+    public void updateBlog(BlogVO blogVO){
+        blogMapper.updateBlog(blogVO.getId(),blogVO.getCategoryId(),blogVO.getCategoryName(),
+                blogVO.getTitle(),blogVO.getContent(),blogVO.getLabel());
     }
 
     @Override
