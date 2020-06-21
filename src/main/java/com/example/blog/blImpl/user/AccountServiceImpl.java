@@ -19,6 +19,7 @@ public class AccountServiceImpl implements AccountService {
     private final static String WRITE_ERROR = "评论失败";
     @Autowired
     private AccountMapper accountMapper;
+    @Autowired
     private BlogMapper blogMapper;
 
     @Override
