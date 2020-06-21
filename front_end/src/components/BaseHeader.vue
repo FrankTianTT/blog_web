@@ -18,7 +18,7 @@
     </el-col>
     <el-col :span="7">
       <el-input placeholder="请输入" v-model="search">
-        <el-button slot="append" icon="el-icon-search"></el-button>
+        <el-button slot="append" icon="el-icon-search" @click="serarchArticle"></el-button>
       </el-input>
     </el-col>
 
@@ -39,9 +39,8 @@
 
         <template v-else>
           <el-menu-item index="/user/blogHome">
-            <el-avatar size="medium" src="@/assets/logo.png">
-            </el-avatar>
-              <el-label>{{userName}}</el-label>
+              <avatar :username="userName" :size="40" style="float: left"></avatar>
+            <span>{{userName}}</span>
           </el-menu-item>
           <el-menu-item @click="handleLogout">
             <i class="el-icon-back"></i>退出
@@ -54,7 +53,7 @@
 
 <script>
 import { mapGetters, mapActions, mapMutations } from "vuex";
-
+import Avatar from 'vue-avatar'
 export default {
   name: "BaseHeader",
   props: {
@@ -64,22 +63,33 @@ export default {
     //   default: false
     // }
   },
+  components:{
+    Avatar
+  },
   data() {
     return {
       search: ""
     };
   },
   computed: {
-    ...mapGetters(["token", "userName"])
+    ...mapGetters(["token", "userName","articleList"])
     // hasToken() {
     //   return this.token === null;
     // }
   },
   methods: {
     ...mapActions(["logout"]),
+    ...mapMutations(["set_articleList"]),
     handleLogout() {
       this.logout();
       this.$router.push({ name: "Home" });
+    },
+    serarchArticle(){
+      if(this.search!==""){
+        const article = this.articleList.filter(item=>item.title===this.search);
+        console.log(article);
+        this.set_articleList(article);
+      }
     }
   }
 };
@@ -107,4 +117,10 @@ export default {
   max-height: 2.4rem;
   max-width: 100%;
 }
+.vue-avatar--wrapper{
+  position: relative;
+  top:50%;
+  transform: translateY(-50%);
+}
+
 </style>

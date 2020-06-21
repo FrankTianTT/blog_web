@@ -6,6 +6,9 @@ const getters = {
   userName:state=>state.user.userInfo.userName,
   userArticleList: state=>state.user.userArticleList,
   userCommentList:state=>state.user.userCommentList,
+  updateUserInfoModalVisible:state=>state.user.updateUserInfoModalVisible,
+  articleNeedModify:state=>state.user.articleNeedModify,
+  articleFormNeedModify:state=>state.user.articleFormNeedModify,
   //admin
   userList:state => state.admin.userList,
   addUserModalVisible: state => state.admin.addUserModalVisible,

@@ -1,9 +1,9 @@
 <template>
     <div class="me-view-comment-item">
         <div class="me-view-comment-author">
-            <a class="">
-                <img class="me-view-picture" :src="avatar"></img>
-            </a>
+            <div style="float:left;">
+                <avatar :username="authorName" :size="40"></avatar>
+            </div>
             <div class="me-view-info">
                 <span class="me-view-nickname">{{authorName}}</span>
                 <div class="me-view-meta">
@@ -12,7 +12,7 @@
                 </div>
             </div>
         </div>
-        <div >
+        <div>
             <p class="me-view-comment-content">{{content}}</p>
         </div>
     </div>
@@ -20,9 +20,12 @@
 
 <script>
     import defaultAvatar from '@/assets/img/default_avatar.png'
-
+    import Avatar from 'vue-avatar'
     export default {
         name: "CommentItem",
+        components:{
+            Avatar
+        },
         props:{
             id:Number,
             authorName:String,
@@ -76,9 +79,10 @@
     }
 
     .me-view-comment-author {
-        margin: 10px 0;
+        display: inline-block;
         vertical-align: middle;
         float: left;
+        clear: left;
     }
 
     .me-view-nickname {

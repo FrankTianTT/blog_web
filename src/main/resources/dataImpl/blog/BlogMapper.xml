@@ -5,6 +5,11 @@
         insert into Blog(userId, categoryId, userName, categoryName, title, content, label, view_times, create_date)
         values (#{userId},#{categoryId},#{userName},#{categoryName},#{title},#{content},#{label},#{viewTimes},#{createDate})
     </insert>
+    <update id="updateBlog">
+        update blog set categoryId=#{categoryId},categoryName=#{categoryName},
+                        title=#{title},content=#{content},label=#{label}
+        where id=#{id}
+    </update>
     <select id="selectAllBlog" resultMap="Blog">
         select * from blog
     </select>
