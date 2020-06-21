@@ -6,7 +6,7 @@ public class CommentVO {
     private int userId;
     private String authorName;
     private String content;
-    private String datetime;
+    private String comment_time;
 
     public int getId() {
         return id;
@@ -42,11 +42,11 @@ public class CommentVO {
     }
 
     public String getDatetime() {
-        return datetime;
+        return comment_time;
     }
 
-    public void setDatetime(String datetime) {
-        this.datetime = datetime;
+    public void setDatetime(String comment_time) {
+        this.comment_time = comment_time;
     }
 
     public int getUserId() {
