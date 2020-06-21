@@ -1,6 +1,7 @@
 package com.example.blog.blImpl.user;
 
 import com.example.blog.bl.user.AccountService;
+import com.example.blog.data.blog.BlogMapper;
 import com.example.blog.data.user.AccountMapper;
 import com.example.blog.po.Comment;
 import com.example.blog.po.User;
@@ -18,6 +19,7 @@ public class AccountServiceImpl implements AccountService {
     private final static String WRITE_ERROR = "评论失败";
     @Autowired
     private AccountMapper accountMapper;
+    private BlogMapper blogMapper;
 
     @Override
     public ResponseVO registerAccount(UserVO userVO) {
@@ -80,6 +82,10 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public List<BlogVO> retrieveUserBlogs(int userId){
-        return accountMapper.selectAllUserBlogs(userId);
+        List<BlogVO> blogs = accountMapper.selectAllUserBlogs(userId);
+        for(BlogVO blog: blogs){
+            blog.setComments(blogMapper.selectAllBlogComments(blog.getId()));
+        }
+        return blogs;
     }
 }
