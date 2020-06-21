@@ -166,6 +166,7 @@ export default {
         };
         console.log(data);
         this.set_articleNeedModify(false);
+        this.modifyArticle(data);
       } else {
         this.addArticle(data);
       }
