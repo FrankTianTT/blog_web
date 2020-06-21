@@ -128,7 +128,7 @@ CREATE TABLE `comment` (
     `userId` int(11) NOT NULL,
     `authorName` varchar(255) NOT NULL,
     `content` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-    `comment_time` datetime DEFAULT NULL,
+    `datetime` datetime DEFAULT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 

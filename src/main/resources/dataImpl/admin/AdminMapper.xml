@@ -47,6 +47,6 @@
         <result column="userId" property="userId"></result>
         <result column="authorName" property="authorName"></result>
         <result column="content" property="content"></result>
-        <result column="comment_time" property="comment_time"></result>
+        <result column="datetime" property="datetime"></result>
     </resultMap>
 </mapper>
