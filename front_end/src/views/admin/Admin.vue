@@ -1,5 +1,5 @@
 <template>
-  <el-container>
+  <div>
     <el-header>
       <div class="name">博客后台管理系统</div>
       <el-button @click="handleLogout()">退出登陆</el-button>
@@ -28,7 +28,7 @@
         <router-view/>
       </el-main>
     </el-container>
-  </el-container>
+  </div>
 </template>
 <script>
 import { mapGetters, mapActions, mapMutations } from "vuex";
@@ -67,6 +67,6 @@ export default {
   background-color: #f5f5f5;
 }
 .el-container{
-    height: 100%;
+  height:-webkit-fill-available;
 }
 </style>

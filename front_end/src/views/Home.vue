@@ -63,9 +63,7 @@ export default {
 .el-card:not(:first-child) {
   margin-top: 20px;
 }
-.me-area {
-  background-color: #fff;
-}
+
 .me-ad {
   font-weight: 600;
   font-size: 40px;

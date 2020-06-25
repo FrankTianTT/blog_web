@@ -10,7 +10,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  /* background-color: #f5f5f5; */
+  background-color: #f5f5f5;
   height: 100%;
 }
 html,body {
